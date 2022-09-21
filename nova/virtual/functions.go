@@ -5,7 +5,7 @@ import (
 	"io"
 	"log"
 
-	"nova/editor"
+	//"nova/editor"
 	"nova/texts"
 	"os"
 	"strings"
@@ -70,7 +70,7 @@ func openFile(store billy.Filesystem, fileName string) billy.Filesystem {
 		log.Println(err)
 		return nil
 	}
-	editor.InitNovaEditor(store, newFile)
+	//editor.InitNovaEditor(store, newFile)
 	newFile.Close()
 	return store
 }

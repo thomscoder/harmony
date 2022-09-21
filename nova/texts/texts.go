@@ -33,4 +33,5 @@ const (
 	BACKGROUND_RED           = "\033[0;41m"
 	BACKGROUND_ORANGE        = "\033[0;43m"
 	BACKGROUND_CYAN          = "\033[0;46m"
+	HtmlEmptyStringMsg       = `Cannot be empty`
 )

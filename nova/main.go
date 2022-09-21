@@ -1,19 +1,22 @@
 package main
 
 import (
+	"nova/texts"
 	"syscall/js"
 )
 
-var htmlString = `<h4>Hello, I'm an HTML snippet from Go!</h4>`
-
-func GetHtml() js.Func {
+func InitProject() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
-		return htmlString
+		str := args[0].String()
+		if len(str) == 0 {
+			return texts.HtmlEmptyStringMsg
+		}
+		return str
 	})
 }
 
 func main() {
 	ch := make(chan struct{}, 0)
-	js.Global().Set("getHtml", GetHtml())
+	js.Global().Set("initProject", InitProject())
 	<-ch
 }

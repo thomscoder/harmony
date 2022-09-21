@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "make compile && cd client && pnpm dev"
+    "dev": "make compile && cd client && pnpm dev",
+    "build": "make compile && cd client && pnpm build"
   },
   "keywords": [],
   "author": "",

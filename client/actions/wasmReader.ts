@@ -6,3 +6,8 @@ export const initWasm = ()  => {
         go.run(result.instance);
     });
 }
+
+export const startGo = (data: any) => {
+    // @ts-ignore
+    return initProject(data);
+};

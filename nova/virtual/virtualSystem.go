@@ -35,8 +35,8 @@ func (ns *NovaStore) SetWatcher(store billy.Filesystem) map[string]string {
 	return ns.Watcher
 }
 
-func (ns *NovaStore) CreateStore(url string) (billy.Filesystem, *memory.Storage) {
-	return createVirtualSystem(url)
+func (ns *NovaStore) CreateStore() (billy.Filesystem, *memory.Storage) {
+	return createVirtualSystem()
 }
 
 func (ns *NovaStore) GetFiles(store billy.Filesystem, dir string) {
@@ -105,11 +105,11 @@ func (ns *NovaStore) GetLogs(repo *git.Repository) object.CommitIter {
 	return logs
 }
 
-func (ns *NovaStore) GotoBranch(repo *git.Repository, branchName string) error {
-	err := createBranch(repo, branchName)
-	if err != nil {
-		return err
-	}
-	ns.SetBranch(repo)
-	return nil
-}
+// func (ns *NovaStore) GotoBranch(repo *git.Repository, branchName string) error {
+// 	err := createBranch(repo, branchName)
+// 	if err != nil {
+// 		return err
+// 	}
+// 	ns.SetBranch(repo)
+// 	return nil
+// }

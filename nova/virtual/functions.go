@@ -14,39 +14,37 @@ import (
 	"github.com/go-git/go-billy/v5/memfs"
 	"github.com/go-git/go-billy/v5/util"
 	"github.com/go-git/go-git/v5"
-	"github.com/go-git/go-git/v5/config"
-	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/storage/memory"
 )
 
-func createVirtualSystem(url string) (billy.Filesystem, *memory.Storage) {
+func createVirtualSystem() (billy.Filesystem, *memory.Storage) {
 	storer := memory.NewStorage()
 	novaFs := memfs.New()
-	virtualGit(storer, novaFs, url)
+	//virtualGit(storer, novaFs, url)
 	return novaFs, storer
 }
 
-func virtualGit(storer *memory.Storage, fs billy.Filesystem, url string) error {
-	repo, err := git.Clone(storer, fs, &git.CloneOptions{
-		URL: url,
-	})
-	if err != nil {
-		log.Fatal(err)
-	}
-	remote, err := repo.Remote("origin")
-	if err != nil {
-		return err
-	}
+// func virtualGit(storer *memory.Storage, fs billy.Filesystem, url string) error {
+// 	repo, err := git.Clone(storer, fs, &git.CloneOptions{
+// 		URL: url,
+// 	})
+// 	if err != nil {
+// 		log.Fatal(err)
+// 	}
+// 	remote, err := repo.Remote("origin")
+// 	if err != nil {
+// 		return err
+// 	}
 
-	opts := &git.FetchOptions{
-		RefSpecs: []config.RefSpec{"refs/*:refs/*", "HEAD:refs/heads/HEAD"},
-	}
+// 	opts := &git.FetchOptions{
+// 		RefSpecs: []config.RefSpec{"refs/*:refs/*", "HEAD:refs/heads/HEAD"},
+// 	}
 
-	if err := remote.Fetch(opts); err != nil {
-		return err
-	}
-	return nil
-}
+// 	if err := remote.Fetch(opts); err != nil {
+// 		return err
+// 	}
+// 	return nil
+// }
 
 func listFiles(store billy.Filesystem, dir string) error {
 	files, err := store.ReadDir(dir)
@@ -107,34 +105,34 @@ func craftScreenshotMessage(store billy.Filesystem, wt *git.Worktree) string {
 	return texts.Screenshot
 }
 
-func createBranch(repo *git.Repository, branchName string) error {
-	exists := false
-	wt, _ := repo.Worktree()
-	branches, _ := repo.Branches()
-	branches.ForEach(func(branch *plumbing.Reference) error {
-		if branch.Name().Short() == branchName {
-			exists = true
-			err := wt.Checkout(&git.CheckoutOptions{
-				Create: false,
-				Force:  false,
-				Branch: plumbing.NewBranchReferenceName(branchName),
-			})
-			if err != nil {
-				return err
-			}
-			return nil
-		}
-		return nil
-	})
-	if exists == false {
-		err := wt.Checkout(&git.CheckoutOptions{
-			Create: true,
-			Force:  false,
-			Branch: plumbing.NewBranchReferenceName(branchName),
-		})
-		if err != nil {
-			return err
-		}
-	}
-	return nil
-}
+// func createBranch(repo *git.Repository, branchName string) error {
+// 	exists := false
+// 	wt, _ := repo.Worktree()
+// 	branches, _ := repo.Branches()
+// 	branches.ForEach(func(branch *plumbing.Reference) error {
+// 		if branch.Name().Short() == branchName {
+// 			exists = true
+// 			err := wt.Checkout(&git.CheckoutOptions{
+// 				Create: false,
+// 				Force:  false,
+// 				Branch: plumbing.NewBranchReferenceName(branchName),
+// 			})
+// 			if err != nil {
+// 				return err
+// 			}
+// 			return nil
+// 		}
+// 		return nil
+// 	})
+// 	if exists == false {
+// 		err := wt.Checkout(&git.CheckoutOptions{
+// 			Create: true,
+// 			Force:  false,
+// 			Branch: plumbing.NewBranchReferenceName(branchName),
+// 		})
+// 		if err != nil {
+// 			return err
+// 		}
+// 	}
+// 	return nil
+// }

@@ -29,6 +29,17 @@ func jsonReader(jsonFile []byte) (string, string) {
 	return files.Files[0].Name, files.Files[0].Content
 }
 
+func OpenVirtualFile() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		filename := args[0].String()
+
+		if len(filename) == 0 {
+			return texts.HtmlEmptyStringMsg
+		}
+		return novaStore.GetFileContent(store, filename)
+	})
+}
+
 func InitProject() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		filename, content := jsonReader([]byte(args[0].String()))

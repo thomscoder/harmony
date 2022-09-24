@@ -64,21 +64,15 @@ export function Editor({text}: {text: string}) {
     };
 
     return (
-        <div>
-            <div>
-                <h3>Web Editor</h3>
-            </div>
-            <div>
-                <MonacoEditor
-                    width="100%"
-                    height="80vh"
-                    language="json"
-                    theme="vs"
-                    options={MONACO_OPTIONS}
-                    onChange={onChange}
-                    editorDidMount={editorDidMount}
-                />
-            </div>
-        </div>
+
+        <MonacoEditor
+            width="100%"
+            height="80vh"
+            language="txt"
+            theme="vs"
+            options={MONACO_OPTIONS}
+            onChange={onChange}
+            editorDidMount={editorDidMount}
+        />
     );
 }

@@ -10,13 +10,6 @@ import (
 )
 
 func Init(ns ns.NovaStore, store billy.Filesystem, filename string, content string) string {
-	// var text string
-	// var err error
-	// repoToClone := getInputs()
-
-	// if repoToClone == "" {
-	// 	repoToClone = texts.CurrentDirectory
-	// }
 	ns.SetWatcher(store)
 	file := ns.OpenFile(store, filename)
 	ns.Save(store, file, content)
@@ -24,27 +17,6 @@ func Init(ns ns.NovaStore, store billy.Filesystem, filename string, content stri
 	fmt.Println(filenames)
 	//ns.GetFileContent(store, filename)
 	return strings.Join(filenames, " ")
-	// reader := bufio.NewReader(os.Stdin)
-	// repo, openingError := git.Open(storer, store)
-	// if openingError != nil {
-	// 	log.Fatal(openingError)
-	// }
-
-	// for {
-	// 	if text == "" {
-	// 		ns.SetBranch(repo)
-	// 		fmt.Printf("%s%s%s %s", texts.WHITE, ns.CurrentBranch.Name().Short(), texts.RESET, texts.BeforeInput)
-	// 		if text, err = reader.ReadString('\n'); err != nil {
-	// 			fmt.Println(texts.ReadingError)
-	// 			return
-	// 		} else {
-	// 			if !inputsParser(store, repo, ns, text) {
-	// 				os.Exit(1)
-	// 			}
-	// 			text = ""
-	// 		}
-	// 	}
-	// }
 }
 
 // func inputsParser(store billy.Filesystem, repo *git.Repository, ns ns.NovaStore, str string) bool {

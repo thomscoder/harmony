@@ -2,7 +2,14 @@
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
+}
+
+.App {
   text-align: center;
+}
+
+.react-monaco-editor-container {
+  text-align: initial;
 }
 
 .logo {

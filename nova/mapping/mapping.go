@@ -6,10 +6,13 @@ import (
 	"nova/texts"
 	nova "nova/virtual"
 	"syscall/js"
+
+	"github.com/go-git/go-billy/v5"
 )
 
 var novaStore nova.NovaStore = nova.NovaStore{}
 var store, err = novaStore.CreateStore()
+var file billy.File
 
 type Files struct {
 	Files []File `json:"files"`
@@ -37,6 +40,19 @@ func OpenVirtualFile() js.Func {
 			return texts.HtmlEmptyStringMsg
 		}
 		return novaStore.GetFileContent(store, filename)
+	})
+}
+
+func SaveVirtualFile() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		filename, content := jsonReader([]byte(args[0].String()))
+
+		if len(filename) == 0 {
+			return texts.HtmlEmptyStringMsg
+		}
+		novaStore.Save(store, filename, content)
+
+		return "Saved"
 	})
 }
 

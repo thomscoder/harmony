@@ -1,7 +1,6 @@
 package virtual
 
 import (
-	"fmt"
 	"log"
 	"nova/texts"
 
@@ -9,8 +8,6 @@ import (
 	"github.com/go-git/go-billy/v5/util"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
-	"github.com/go-git/go-git/v5/plumbing/object"
-	"github.com/go-git/go-git/v5/plumbing/storer"
 	"github.com/go-git/go-git/v5/storage/memory"
 )
 
@@ -22,8 +19,6 @@ type StoreInterface interface {
 	CreateFiles(billy.Filesystem, string)
 	SetBranch(*git.Repository)
 	GetStatus(*git.Worktree) git.Status
-	GetLogs(*git.Repository)
-	GetBranches(*git.Repository) (storer.ReferenceIter, error)
 }
 type NovaStore struct {
 	Watcher       map[string]string
@@ -53,35 +48,12 @@ func (ns *NovaStore) OpenFile(store billy.Filesystem, fileName string) billy.Fil
 	return file
 }
 
-func (ns *NovaStore) Save(store billy.Filesystem, file billy.File, content string) {
-	util.WriteFile(store, file.Name(), []byte(content), 0644)
-}
-
-func (ns *NovaStore) GetBranches(repo *git.Repository) (storer.ReferenceIter, error) {
-	branches, err := repo.Branches()
-	if err != nil {
-		return nil, err
-	}
-	return branches, nil
+func (ns *NovaStore) Save(store billy.Filesystem, filename string, content string) {
+	util.WriteFile(store, filename, []byte(content), 0644)
 }
 
 func (ns *NovaStore) GetFileContent(store billy.Filesystem, fileName string) string {
 	return readFileContent(store, fileName)
-}
-
-func (ns *NovaStore) Screenshot(store billy.Filesystem, wt *git.Worktree) error {
-	files, _ := store.ReadDir(texts.CurrentDirectory)
-	for _, file := range files {
-		wt.Add(file.Name())
-	}
-	status, _ := wt.Status()
-	msg := status.String()
-	hash, err := wt.Commit(msg, &git.CommitOptions{})
-	if err != nil {
-		return err
-	}
-	log.Printf(fmt.Sprintf(texts.CommittedSuccessfully, hash, msg))
-	return nil
 }
 
 func (ns *NovaStore) SetBranch(repo *git.Repository) {
@@ -91,31 +63,3 @@ func (ns *NovaStore) SetBranch(repo *git.Repository) {
 	}
 	ns.CurrentBranch = currentBranch
 }
-
-func (ns *NovaStore) GetStatus(wt *git.Worktree) git.Status {
-	status, err := wt.Status()
-	if err != nil {
-		return nil
-	}
-	return status
-}
-
-func (ns *NovaStore) GetLogs(repo *git.Repository) object.CommitIter {
-	logs, err := repo.Log(&git.LogOptions{
-		All:   true,
-		Order: git.LogOrderCommitterTime,
-	})
-	if err != nil {
-		return nil
-	}
-	return logs
-}
-
-// func (ns *NovaStore) GotoBranch(repo *git.Repository, branchName string) error {
-// 	err := createBranch(repo, branchName)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	ns.SetBranch(repo)
-// 	return nil
-// }

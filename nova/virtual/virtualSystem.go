@@ -40,8 +40,8 @@ func (ns *NovaStore) CreateStore() (billy.Filesystem, *memory.Storage) {
 	return createVirtualSystem()
 }
 
-func (ns *NovaStore) GetFiles(store billy.Filesystem, dir string) {
-	listFiles(store, dir)
+func (ns *NovaStore) GetFiles(store billy.Filesystem, dir string) []string {
+	return listFiles(store, dir)
 }
 
 func (ns *NovaStore) OpenFile(store billy.Filesystem, fileName string) billy.File {

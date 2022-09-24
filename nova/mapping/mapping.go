@@ -8,6 +8,9 @@ import (
 	"syscall/js"
 )
 
+var novaStore nova.NovaStore = nova.NovaStore{}
+var store, err = novaStore.CreateStore()
+
 type Files struct {
 	Files []File `json:"files"`
 }
@@ -33,7 +36,6 @@ func InitProject() js.Func {
 		if len(filename) == 0 {
 			return texts.HtmlEmptyStringMsg
 		}
-		novaStore := nova.NovaStore{}
-		return handlers.Init(novaStore, filename, content)
+		return handlers.Init(novaStore, store, filename, content)
 	})
 }

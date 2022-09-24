@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import {initWasm, startGo} from '../actions/wasmReader'
+import { Editor } from './components/Editor';
 
 initWasm();
 
 function App() {
-  const [text, setText] = useState('');
-  const [inputText, setInputText] = useState('');
   const [file, setFile] = useState<File>();
   const [ fileContent, setFileContent ] = useState<any>();
+  const [text, setText] = useState('');
+  const [ showEditor, setShowEditor ] = useState<boolean>(false);
 
 
 
@@ -39,13 +40,20 @@ function App() {
           content: fileContent
         }]
       }));
-      console.log(created)
+      if (created) {
+        setShowEditor(!!created);
+        setText(created);
+        const fileSelector = document.getElementById('file-selector') as HTMLInputElement;
+        fileSelector.type = 'text';
+        fileSelector.type = 'file';
+      }
     }
   }, [fileContent])
 
   return (
     <div className="App">
       <input type="file" accept=".txt" id="file-selector"/>
+      {/* {showEditor && <Editor text={text} />} */}
     </div>
   )
 }

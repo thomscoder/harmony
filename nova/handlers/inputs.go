@@ -4,9 +4,12 @@ import (
 	"fmt"
 	"nova/texts"
 	ns "nova/virtual"
+	"strings"
+
+	"github.com/go-git/go-billy/v5"
 )
 
-func Init(ns ns.NovaStore, filename string, content string) string {
+func Init(ns ns.NovaStore, store billy.Filesystem, filename string, content string) string {
 	// var text string
 	// var err error
 	// repoToClone := getInputs()
@@ -14,11 +17,13 @@ func Init(ns ns.NovaStore, filename string, content string) string {
 	// if repoToClone == "" {
 	// 	repoToClone = texts.CurrentDirectory
 	// }
-	store, _ := ns.CreateStore()
 	ns.SetWatcher(store)
 	file := ns.OpenFile(store, filename)
 	ns.Save(store, file, content)
-	return ns.GetFileContent(store, filename)
+	filenames := ns.GetFiles(store, texts.CurrentDirectory)
+	fmt.Println(filenames)
+	//ns.GetFileContent(store, filename)
+	return strings.Join(filenames, " ")
 	// reader := bufio.NewReader(os.Stdin)
 	// repo, openingError := git.Open(storer, store)
 	// if openingError != nil {

@@ -9,8 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "monaco-editor": "^0.34.0",
+    "monaco-languageclient": "^4.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-monaco-editor": "^0.50.1",
+    "vscode-oniguruma": "^1.6.2",
+    "vscode-textmate": "^7.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.17",

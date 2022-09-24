@@ -46,8 +46,9 @@ func createVirtualSystem() (billy.Filesystem, *memory.Storage) {
 // 	return nil
 // }
 
-func listFiles(store billy.Filesystem, dir string) error {
+func listFiles(store billy.Filesystem, dir string) []string {
 	files, err := store.ReadDir(dir)
+	var fileInfos []string
 
 	if err != nil {
 		log.Println(err)
@@ -57,9 +58,10 @@ func listFiles(store billy.Filesystem, dir string) error {
 		if file.IsDir() {
 			listFiles(store, file.Name())
 		}
+		fileInfos = append(fileInfos, file.Name())
 		fmt.Printf("%s %s%s %s\n", file.Mode(), texts.GREEN, dir+"/"+file.Name(), texts.RESET)
 	}
-	return nil
+	return fileInfos
 }
 
 func openFile(store billy.Filesystem, fileName string) (billy.Filesystem, billy.File) {

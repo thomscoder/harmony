@@ -54,7 +54,7 @@ func listFiles(store billy.Filesystem, dir string) error {
 		return nil
 	}
 	for _, file := range files {
-		if file.IsDir() && file.Name() != ".git" {
+		if file.IsDir() {
 			listFiles(store, file.Name())
 		}
 		fmt.Printf("%s %s%s %s\n", file.Mode(), texts.GREEN, dir+"/"+file.Name(), texts.RESET)
@@ -62,24 +62,24 @@ func listFiles(store billy.Filesystem, dir string) error {
 	return nil
 }
 
-func openFile(store billy.Filesystem, fileName string) billy.Filesystem {
+func openFile(store billy.Filesystem, fileName string) (billy.Filesystem, billy.File) {
 	newFile, err := store.OpenFile(fileName, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {
 		log.Println(err)
-		return nil
+		return nil, nil
 	}
 	//editor.InitNovaEditor(store, newFile)
 	newFile.Close()
-	return store
+	return store, newFile
 }
 
-func readFileContent(store billy.Filesystem, fileName string) {
+func readFileContent(store billy.Filesystem, fileName string) string {
 	file, err := util.ReadFile(store, fileName)
 	if err != nil {
 		log.Println(err)
-		return
+		return "Couldn't read " + fileName
 	}
-	log.Println(string(file))
+	return string(file)
 }
 
 func turnToString(r io.Reader, file billy.File) (res string, err error) {

@@ -6,7 +6,7 @@ import (
 	ns "nova/virtual"
 )
 
-func Init(ns ns.NovaStore, filename string) {
+func Init(ns ns.NovaStore, filename string, content string) string {
 	// var text string
 	// var err error
 	// repoToClone := getInputs()
@@ -16,7 +16,9 @@ func Init(ns ns.NovaStore, filename string) {
 	// }
 	store, _ := ns.CreateStore()
 	ns.SetWatcher(store)
-	ns.OpenFile(store, filename)
+	file := ns.OpenFile(store, filename)
+	ns.Save(store, file, content)
+	return ns.GetFileContent(store, filename)
 	// reader := bufio.NewReader(os.Stdin)
 	// repo, openingError := git.Open(storer, store)
 	// if openingError != nil {

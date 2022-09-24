@@ -1,24 +1,39 @@
 package mapping
 
 import (
-	"fmt"
+	"encoding/json"
 	"nova/handlers"
 	"nova/texts"
 	nova "nova/virtual"
 	"syscall/js"
 )
 
+type Files struct {
+	Files []File `json:"files"`
+}
+
+type File struct {
+	Name    string `json:"name"`
+	Content string `json:"content"`
+}
+
+func jsonReader(jsonFile []byte) (string, string) {
+
+	var files Files
+
+	json.Unmarshal(jsonFile, &files)
+
+	return files.Files[0].Name, files.Files[0].Content
+}
+
 func InitProject() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
-		fmt.Println(args[0])
-		fmt.Println("fuck")
-		filename := args[0].String()
+		filename, content := jsonReader([]byte(args[0].String()))
+
 		if len(filename) == 0 {
 			return texts.HtmlEmptyStringMsg
 		}
 		novaStore := nova.NovaStore{}
-		handlers.Init(novaStore, filename)
-
-		return "Created file: " + filename
+		return handlers.Init(novaStore, filename, content)
 	})
 }

@@ -6,6 +6,7 @@ import (
 	"nova/texts"
 
 	"github.com/go-git/go-billy/v5"
+	"github.com/go-git/go-billy/v5/util"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
@@ -43,12 +44,17 @@ func (ns *NovaStore) GetFiles(store billy.Filesystem, dir string) {
 	listFiles(store, dir)
 }
 
-func (ns *NovaStore) OpenFile(store billy.Filesystem, fileName string) {
-	fileGotCreated := openFile(store, fileName)
+func (ns *NovaStore) OpenFile(store billy.Filesystem, fileName string) billy.File {
+	fileGotCreated, file := openFile(store, fileName)
 	if fileGotCreated != nil {
 		log.Println(texts.FileOpenedSuccessfully, fileName)
 		ns.SetWatcher(fileGotCreated)
 	}
+	return file
+}
+
+func (ns *NovaStore) Save(store billy.Filesystem, file billy.File, content string) {
+	util.WriteFile(store, file.Name(), []byte(content), 0644)
 }
 
 func (ns *NovaStore) GetBranches(repo *git.Repository) (storer.ReferenceIter, error) {
@@ -59,8 +65,8 @@ func (ns *NovaStore) GetBranches(repo *git.Repository) (storer.ReferenceIter, er
 	return branches, nil
 }
 
-func (ns *NovaStore) GetFileContent(store billy.Filesystem, fileName string) {
-	readFileContent(store, fileName)
+func (ns *NovaStore) GetFileContent(store billy.Filesystem, fileName string) string {
+	return readFileContent(store, fileName)
 }
 
 func (ns *NovaStore) Screenshot(store billy.Filesystem, wt *git.Worktree) error {

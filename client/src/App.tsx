@@ -28,25 +28,23 @@ function App() {
         setFileContent(evt?.target!.result);
       };
       reader.readAsText(file);
-      startGo(file.name);
     }
   }, [file]);
 
+  useEffect(() => {
+    if (file && fileContent) {
+      const created = startGo(JSON.stringify({
+        files: [{
+          name: file!.name,
+          content: fileContent
+        }]
+      }));
+      console.log(created)
+    }
+  }, [fileContent])
+
   return (
     <div className="App">
-
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        // @ts-ignore
-        return setText(startGo(inputText))
-      }}>
-        <label htmlFor="repo"></label>
-        <input type="text" name="repo" onChange={(e) => {
-          setInputText(e.target.value);
-        }} />
-        <button type="submit">Submit</button>
-      </form>
-      <div>{text}</div>
       <input type="file" accept=".txt" id="file-selector"/>
     </div>
   )

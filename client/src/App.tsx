@@ -1,10 +1,9 @@
 import { Fragment, useEffect, useRef, useState } from 'react'
 import './App.css'
-import {initWasm, startGo} from '../actions/wasmReader'
+import {startGo} from '../actions/wasmReader'
 import { Editor } from './components/Editor';
 import {GrDocumentText as DocumentIcon} from '@react-icons/all-files/gr/GrDocumentText'
 
-initWasm();
 
 function App() {
   const [file, setFile] = useState<File>();

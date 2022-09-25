@@ -68,7 +68,6 @@ export function Editor({text, save, close}: {text: string, save: any, close: any
     };
 
     const onChange = (newCode: string, event: monaco.editor.IModelContentChangedEvent) => {
-        console.log('onChange', newCode);
         setWrittenText(newCode);
     };
 

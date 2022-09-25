@@ -24,28 +24,6 @@ func createVirtualSystem() (billy.Filesystem, *memory.Storage) {
 	return novaFs, storer
 }
 
-// func virtualGit(storer *memory.Storage, fs billy.Filesystem, url string) error {
-// 	repo, err := git.Clone(storer, fs, &git.CloneOptions{
-// 		URL: url,
-// 	})
-// 	if err != nil {
-// 		log.Fatal(err)
-// 	}
-// 	remote, err := repo.Remote("origin")
-// 	if err != nil {
-// 		return err
-// 	}
-
-// 	opts := &git.FetchOptions{
-// 		RefSpecs: []config.RefSpec{"refs/*:refs/*", "HEAD:refs/heads/HEAD"},
-// 	}
-
-// 	if err := remote.Fetch(opts); err != nil {
-// 		return err
-// 	}
-// 	return nil
-// }
-
 func listFiles(store billy.Filesystem, dir string) []string {
 	files, err := store.ReadDir(dir)
 	var fileInfos []string
@@ -70,7 +48,6 @@ func openFile(store billy.Filesystem, fileName string) (billy.Filesystem, billy.
 		log.Println(err)
 		return nil, nil
 	}
-	//editor.InitNovaEditor(store, newFile)
 	newFile.Close()
 	return store, newFile
 }

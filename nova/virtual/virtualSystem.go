@@ -55,11 +55,3 @@ func (ns *NovaStore) Save(store billy.Filesystem, filename string, content strin
 func (ns *NovaStore) GetFileContent(store billy.Filesystem, fileName string) string {
 	return readFileContent(store, fileName)
 }
-
-func (ns *NovaStore) SetBranch(repo *git.Repository) {
-	currentBranch, err := repo.Head()
-	if err != nil {
-		log.Fatal(err)
-	}
-	ns.CurrentBranch = currentBranch
-}

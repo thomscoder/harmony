@@ -5,6 +5,16 @@
   height: 80vh;
 }
 
+#github {
+  position: absolute;
+  top: 2em;
+  right: 2em;
+}
+
+#github a {
+  color: white;
+}
+
 h1 {
   text-align: center;
   color: #ffac4b;

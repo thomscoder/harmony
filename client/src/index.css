@@ -32,7 +32,6 @@ body {
   min-height: 100vh;
   background-color: #1e1e1e;
   color: white;
-  transition: all 0.3 ease;
 }
 
 #layer.editor-open {

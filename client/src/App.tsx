@@ -3,6 +3,7 @@ import './App.css';
 import { startGo } from '../actions/wasmReader';
 import { Editor } from './components/Editor';
 import { GrDocumentText as DocumentIcon } from '@react-icons/all-files/gr/GrDocumentText';
+import { AiFillGithub as GithubIcon} from '@react-icons/all-files/ai/AiFillGithub';
 
 function App() {
   const [file, setFile] = useState<File>();
@@ -103,6 +104,7 @@ function App() {
     <Fragment>
       <h1>Harmony ✨</h1>
       <div id="layer"></div>
+      <div id="github"><a href="https://github.com/thomscoder/harmony" target="_blank"><GithubIcon size={30} /></a></div>
       <div className="file-selectors-wrapper">
         <label className="custom-file-upload">
           <input type="file" id="file-selector" disabled={disableAll} />

@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-icons/all-files": "^4.1.0",
     "monaco-editor": "^0.34.0",
     "monaco-languageclient": "^4.0.0",
     "react": "^18.2.0",

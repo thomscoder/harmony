@@ -2,7 +2,7 @@ import { Fragment, useEffect, useRef, useState } from 'react'
 import './App.css'
 import {initWasm, startGo} from '../actions/wasmReader'
 import { Editor } from './components/Editor';
-import fileImage from './img/file.png'
+import {GrDocumentText as DocumentIcon} from '@react-icons/all-files/gr/GrDocumentText'
 
 initWasm();
 
@@ -15,6 +15,7 @@ function App() {
   const [openFile, setOpenFile] = useState<string>('');
   const [disableAll, setDisableAll] = useState<boolean>(false);
   const [disableFileCreation, setDisableFileCreation] = useState<boolean>(false);
+  const [prevOpenedFiles, setPrevOpenedFiles] = useState<Array<string>>([]);
 
   const fileCreationInput = useRef(null);
 
@@ -74,12 +75,12 @@ function App() {
   }, [fileContent])
 
   useEffect(() => {
-    const body = document.body;
+    const layer = document.querySelector('#layer') as HTMLDivElement;
     if (!!openFile) {
-      body.classList.add("editor-open");
+      layer.classList.add("editor-open");
       setDisableAll(true);
     } else {
-      body.classList.remove("editor-open");
+      layer.classList.remove("editor-open");
       setDisableAll(false);
     }
   }, [openFile])
@@ -95,8 +96,9 @@ function App() {
 
   return (
     <Fragment>
+      <h1>Nova ✨</h1>
+      <div id="layer"></div>
       <div className="file-selectors-wrapper">
-        <h1>Nova</h1>
         <label className="custom-file-upload">
           <input type="file" id="file-selector" disabled={disableAll}/>
           Upload file
@@ -120,20 +122,22 @@ function App() {
         <div className="files-area" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
           {virtualFiles.map((virtualFile, index) => {
             return (
-              <div key={index} className="file">
-                <img className="file-image" src={fileImage} alt="file" onDoubleClick={() => {
-                  // @ts-ignore
-                  setEditorContent(openVirtualFile(virtualFile))
-                  setOpenFile(virtualFile);
-                }}/>
-                <div key={index} className="file">{virtualFile}</div>
-              </div>
+                <div key={index} className={`virtual-file-wrapper ${!!prevOpenedFiles.find(f => f === virtualFile) ? 'modified' : ''}`}>
+                  <DocumentIcon size={60} onDoubleClick={() => {
+                    // @ts-ignore
+                    setEditorContent(openVirtualFile(virtualFile))
+                    setOpenFile(virtualFile)
+                    setPrevOpenedFiles((prev: Array<string>) => [...prev, virtualFile])
+                  }}
+                  />
+                  <div key={index} className="file">{virtualFile}</div>
+                </div>
             )
           })}
         </div>
         {openFile && !!editorContent && 
           <div className="nova-editor">
-            <Editor text={editorContent} save={saveChanges} close={closeEditor} />
+            <Editor text={editorContent} save={saveChanges} close={closeEditor} filename={openFile} />
           </div>
         }
       </div>

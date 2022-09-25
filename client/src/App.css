@@ -12,14 +12,22 @@ h1 {
 
 .file-selectors-wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
-.file-image {
-  width: 15%;
+.virtual-file-wrapper {
+  padding: 2em;
+}
+
+.virtual-file-wrapper svg path {
+  stroke: #ffac4b;
+}
+
+.virtual-file-wrapper.modified svg path {
+  stroke: #d5a5f7;
 }
 
 .App {
@@ -29,7 +37,7 @@ h1 {
 #create-file-by-name {
   background-color: #343436;
   padding: .6em;
-  border: 1px solid #fda2d5;
+  border: 1px solid #ffac4b;
   color: white;
 }
 
@@ -42,14 +50,14 @@ h1 {
 }
 
 input[type="file"] {
-    display: none;
+  display: none;
 }
 
 .custom-file-upload {
-    border: 1px solid #fda2d5;
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
+  border: 1px solid #ffac4b;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
 }
 
 .files-area {
@@ -92,7 +100,7 @@ input[type="file"] {
   border-radius: 0;
 }
 
-.nova-editor form .editor-btn-container button:hover, #create-file-btn:hover {
+.nova-editor form .editor-btn-container button:hover, #create-file-btn {
   background-color: #44d6ff;
 }
 

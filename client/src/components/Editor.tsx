@@ -48,9 +48,10 @@ const MONACO_OPTIONS: monaco.editor.IEditorConstructionOptions = {
 
 
 
-export function Editor({text, save, close}: {text: string, save: any, close: any}) {
+export function Editor({text, save, close, filename}: {text: string, save: any, close: any, filename: string}) {
     const [writtenText, setWrittenText] = useState<string>('');
     const [saved, setSaved] = useState<boolean>(false);
+    const [fileExt, setFileExt] = useState<string>('');
 
     const textSaver = (e: any) => {
         e.preventDefault();
@@ -66,6 +67,19 @@ export function Editor({text, save, close}: {text: string, save: any, close: any
                 editorModel.setValue(text);
             }
         }
+        const pattern =/\w+(?![\.\w])/;
+        const lang = filename.match(pattern)![0];
+        switch (lang) {
+            case 'js':
+                setFileExt('javascript');
+                break;
+            case 'ts':
+                setFileExt('typescript');
+                break;
+            default:
+                setFileExt(lang)
+                break
+        }
         editor.focus();
     };
 
@@ -78,10 +92,11 @@ export function Editor({text, save, close}: {text: string, save: any, close: any
 
         <Fragment>
             <form onSubmit={textSaver}>
+                <h3>Editing {filename}</h3>
                 <MonacoEditor
                     width="80%"
                     height="40vh"
-                    language="txt"
+                    language={fileExt}
                     theme="vs-dark"
                     options={MONACO_OPTIONS}
                     onChange={onChange}

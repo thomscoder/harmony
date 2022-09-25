@@ -51,6 +51,7 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
   const [saved, setSaved] = useState<boolean>(false);
   const [fileExt, setFileExt] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
+  const [downloader, setDownloader] = useState<boolean>(false);
 
   const textSaver = (e: any) => {
     e.preventDefault();
@@ -86,7 +87,15 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
     setWrittenText(newCode);
     setSaved(false);
     setCopied(false);
+    setDownloader(false);
   };
+
+  const download = (text: string, name: string, type: string) => {
+    var a = document.getElementById("downloader") as any;
+    var file = new Blob([text], {type: type});
+    a.href = URL.createObjectURL(file);
+    a.download = name;
+  }
 
   return (
     <Fragment>
@@ -108,6 +117,15 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
           <button type="submit" className="editor-btn save-btn">
             Save
           </button>
+          <a href="" id="downloader" style={{
+            display: !downloader ? 'none' : 'inline-block',
+          }}>Download</a>
+          {!downloader &&
+            <button type="button" onClick={() => {
+              download(writtenText, filename, 'text/plain')
+              setDownloader(true);
+            }}>Prepare download</button>
+          }
           <button type="button" className="editor-btn close-btn" onClick={() => close()}>
             Close
           </button>

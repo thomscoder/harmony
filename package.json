@@ -6,9 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "make compile && cd client && pnpm dev",
-    "build": "make compile && cd client && pnpm build"
+    "build": "make compile && cd client && pnpm build",
+    "format": "prettier --config ./.prettierrc.js --write --loglevel silent '**/*.{js,ts,tsx,css}'"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^2.7.1"
+  }
 }

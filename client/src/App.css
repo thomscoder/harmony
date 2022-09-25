@@ -22,6 +22,14 @@ h1 {
   padding: 2em;
 }
 
+.virtual-file-wrapper svg {
+  transition: all 0.3s ease;
+}
+
+.virtual-file-wrapper svg:hover {
+  transform: scale(1.2);
+}
+
 .virtual-file-wrapper svg path {
   stroke: #ffac4b;
 }
@@ -36,7 +44,7 @@ h1 {
 
 #create-file-by-name {
   background-color: #343436;
-  padding: .6em;
+  padding: 0.6em;
   border: 1px solid #ffac4b;
   color: white;
 }
@@ -46,10 +54,10 @@ h1 {
 }
 
 #create-file-btn {
-  padding: .4em 1em;
+  padding: 0.4em 1em;
 }
 
-input[type="file"] {
+input[type='file'] {
   display: none;
 }
 
@@ -65,7 +73,7 @@ input[type="file"] {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content:center;
+  justify-content: center;
 }
 
 .nova-editor {
@@ -84,27 +92,26 @@ input[type="file"] {
   align-items: flex-end;
 }
 
-
 .nova-editor form .react-monaco-editor-container {
   width: 100% !important;
   text-align: initial;
   margin: auto;
-  border: .3px solid white;
+  border: 0.3px solid white;
 }
 
 .nova-editor .saved-message {
   color: white;
 }
 
-
-.nova-editor form .editor-btn-container button, #create-file-btn {
+.nova-editor form .editor-btn-container button,
+#create-file-btn {
   background-color: #1e1e1e;
   color: white;
-  border: .3px solid white;
+  border: 0.3px solid white;
   border-radius: 0;
 }
 
-.nova-editor form .editor-btn-container button:hover, #create-file-btn {
+.nova-editor form .editor-btn-container button:hover,
+#create-file-btn {
   background-color: #44d6ff;
 }
-

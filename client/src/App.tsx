@@ -1,13 +1,12 @@
-import { Fragment, useEffect, useRef, useState } from 'react'
-import './App.css'
-import {startGo} from '../actions/wasmReader'
+import { Fragment, useEffect, useRef, useState } from 'react';
+import './App.css';
+import { startGo } from '../actions/wasmReader';
 import { Editor } from './components/Editor';
-import {GrDocumentText as DocumentIcon} from '@react-icons/all-files/gr/GrDocumentText'
-
+import { GrDocumentText as DocumentIcon } from '@react-icons/all-files/gr/GrDocumentText';
 
 function App() {
   const [file, setFile] = useState<File>();
-  const [ fileContent, setFileContent ] = useState<any>();
+  const [fileContent, setFileContent] = useState<any>();
   const [virtualFiles, setVirtualFiles] = useState([]);
   const [editorContent, setEditorContent] = useState<string>('');
   const [virtualFileCreation, setVirtualFileCreation] = useState<string>('');
@@ -19,30 +18,38 @@ function App() {
   const fileCreationInput = useRef(null);
 
   const saveChanges = (content: string) => {
-    console.log(content, openFile)
+    console.log(content, openFile);
     // @ts-ignore
-    saveVirtualFile(JSON.stringify({
-      files: [{
-        name: openFile,
-        content: content
-      }]
-    }))
-  }
+    saveVirtualFile(
+      JSON.stringify({
+        files: [
+          {
+            name: openFile,
+            content: content,
+          },
+        ],
+      }),
+    );
+  };
 
   const closeEditor = () => {
     setOpenFile('');
-  }
+  };
 
   const startGoWrapper = (filename: string, content: string = `Created at: ${new Date().toLocaleString()}`) => {
-    return startGo(JSON.stringify({
-        files: [{
-          name: filename,
-          content: content
-        }]
-      }));
-  }
+    return startGo(
+      JSON.stringify({
+        files: [
+          {
+            name: filename,
+            content: content,
+          },
+        ],
+      }),
+    );
+  };
 
-  useEffect(() =>{
+  useEffect(() => {
     const fileSelector = document.getElementById('file-selector') as HTMLInputElement;
     fileSelector.addEventListener('change', (event) => {
       // @ts-ignore
@@ -65,24 +72,24 @@ function App() {
     if (file && fileContent) {
       const created = startGoWrapper(file.name, fileContent);
       if (created) {
-        setVirtualFiles(created.split(" "));
+        setVirtualFiles(created.split(' '));
         const fileSelector = document.getElementById('file-selector') as HTMLInputElement;
         fileSelector.type = 'text';
         fileSelector.type = 'file';
       }
     }
-  }, [fileContent])
+  }, [fileContent]);
 
   useEffect(() => {
     const layer = document.querySelector('#layer') as HTMLDivElement;
     if (!!openFile) {
-      layer.classList.add("editor-open");
+      layer.classList.add('editor-open');
       setDisableAll(true);
     } else {
-      layer.classList.remove("editor-open");
+      layer.classList.remove('editor-open');
       setDisableAll(false);
     }
-  }, [openFile])
+  }, [openFile]);
 
   useEffect(() => {
     if (!!virtualFileCreation) {
@@ -90,8 +97,7 @@ function App() {
     } else {
       setDisableFileCreation(true);
     }
-
-  }, [virtualFileCreation])
+  }, [virtualFileCreation]);
 
   return (
     <Fragment>
@@ -99,21 +105,32 @@ function App() {
       <div id="layer"></div>
       <div className="file-selectors-wrapper">
         <label className="custom-file-upload">
-          <input type="file" id="file-selector" disabled={disableAll}/>
+          <input type="file" id="file-selector" disabled={disableAll} />
           Upload file
         </label>
         <p>or</p>
         <div>
-          <form onSubmit={(e) => {
-            e.preventDefault();
-            const created = startGoWrapper(virtualFileCreation);
-            setVirtualFiles(created.split(" "));
-            (fileCreationInput.current! as HTMLInputElement).value = '';
-          }}>
-            <input ref={fileCreationInput} type="text" id="create-file-by-name" name="create-file-by-name" placeholder="e.g. example.txt" onChange={(e) => {
-              setVirtualFileCreation(e.target.value);
-            }} />
-            <button type="submit" id="create-file-btn" disabled={disableAll || disableFileCreation}>Create file</button>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const created = startGoWrapper(virtualFileCreation);
+              setVirtualFiles(created.split(' '));
+              (fileCreationInput.current! as HTMLInputElement).value = '';
+            }}
+          >
+            <input
+              ref={fileCreationInput}
+              type="text"
+              id="create-file-by-name"
+              name="create-file-by-name"
+              placeholder="e.g. example.txt"
+              onChange={(e) => {
+                setVirtualFileCreation(e.target.value);
+              }}
+            />
+            <button type="submit" id="create-file-btn" disabled={disableAll || disableFileCreation}>
+              Create file
+            </button>
           </form>
         </div>
       </div>
@@ -121,27 +138,31 @@ function App() {
         <div className="files-area">
           {virtualFiles.map((virtualFile, index) => {
             return (
-                <div key={index} className={`virtual-file-wrapper ${!!prevOpenedFiles.find(f => f === virtualFile) ? 'modified' : ''}`}>
-                  <DocumentIcon size={60} onDoubleClick={() => {
+              <div key={index} className={`virtual-file-wrapper ${!!prevOpenedFiles.find((f) => f === virtualFile) ? 'modified' : ''}`}>
+                <DocumentIcon
+                  size={60}
+                  onDoubleClick={() => {
                     // @ts-ignore
-                    setEditorContent(openVirtualFile(virtualFile))
-                    setOpenFile(virtualFile)
-                    setPrevOpenedFiles((prev: Array<string>) => [...prev, virtualFile])
+                    setEditorContent(openVirtualFile(virtualFile));
+                    setOpenFile(virtualFile);
+                    setPrevOpenedFiles((prev: Array<string>) => [...prev, virtualFile]);
                   }}
-                  />
-                  <div key={index} className="file">{virtualFile}</div>
+                />
+                <div key={index} className="file">
+                  {virtualFile}
                 </div>
-            )
+              </div>
+            );
           })}
         </div>
-        {openFile && !!editorContent && 
+        {openFile && !!editorContent && (
           <div className="nova-editor">
             <Editor text={editorContent} save={saveChanges} close={closeEditor} filename={openFile} />
           </div>
-        }
+        )}
       </div>
     </Fragment>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -130,3 +130,14 @@ input[type='file'] {
   padding: .53em 1em;
   background-color: #ffac4b;
 }
+
+
+@media screen and (max-width: 768px) {
+  .file-selectors p+div form {
+    text-align: center;
+  }
+  .nova-editor form .editor-btn-container button,
+  #create-file-btn, #downloader {
+  padding: .4em;
+}
+}

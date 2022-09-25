@@ -95,7 +95,7 @@ function App() {
 
   return (
     <Fragment>
-      <h1>Nova ✨</h1>
+      <h1>Harmony ✨</h1>
       <div id="layer"></div>
       <div className="file-selectors-wrapper">
         <label className="custom-file-upload">
@@ -118,7 +118,7 @@ function App() {
         </div>
       </div>
       <div className="App">
-        <div className="files-area" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+        <div className="files-area">
           {virtualFiles.map((virtualFile, index) => {
             return (
                 <div key={index} className={`virtual-file-wrapper ${!!prevOpenedFiles.find(f => f === virtualFile) ? 'modified' : ''}`}>

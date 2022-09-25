@@ -52,6 +52,7 @@ export function Editor({text, save, close, filename}: {text: string, save: any, 
     const [writtenText, setWrittenText] = useState<string>('');
     const [saved, setSaved] = useState<boolean>(false);
     const [fileExt, setFileExt] = useState<string>('');
+    const [copied, setCopied] = useState<boolean>(false);
 
     const textSaver = (e: any) => {
         e.preventDefault();
@@ -86,6 +87,7 @@ export function Editor({text, save, close, filename}: {text: string, save: any, 
     const onChange = (newCode: string, event: monaco.editor.IModelContentChangedEvent) => {
         setWrittenText(newCode);
         setSaved(false);
+        setCopied(false);
     };
 
     return (
@@ -103,11 +105,17 @@ export function Editor({text, save, close, filename}: {text: string, save: any, 
                     editorDidMount={editorDidMount}
                 />
                 <div className="editor-btn-container">
+                    <button type="button" className="editor-btn copy-btn" onClick={() => {
+                        navigator.clipboard.writeText(writtenText).then(() => {
+                            setCopied(true);
+                        });
+                    }}>Copy Text</button>
                     <button type="submit" className="editor-btn save-btn">Save</button>
                     <button type="button" className="editor-btn close-btn" onClick={() => close()}>Close</button>
                 </div>
             </form>
             {saved && <p className="saved-message">Saved</p>}
+            {copied && <p className="saved-message">Copied</p>}
         </Fragment>
     );
 }

@@ -50,10 +50,12 @@ const MONACO_OPTIONS: monaco.editor.IEditorConstructionOptions = {
 
 export function Editor({text, save, close}: {text: string, save: any, close: any}) {
     const [writtenText, setWrittenText] = useState<string>('');
+    const [saved, setSaved] = useState<boolean>(false);
 
     const textSaver = (e: any) => {
         e.preventDefault();
         save(writtenText);
+        setSaved(true);
     }
 
     const editorDidMount: EditorDidMount = (editor) => {
@@ -69,6 +71,7 @@ export function Editor({text, save, close}: {text: string, save: any, close: any
 
     const onChange = (newCode: string, event: monaco.editor.IModelContentChangedEvent) => {
         setWrittenText(newCode);
+        setSaved(false);
     };
 
     return (
@@ -84,9 +87,12 @@ export function Editor({text, save, close}: {text: string, save: any, close: any
                     onChange={onChange}
                     editorDidMount={editorDidMount}
                 />
-                <button type="submit">Save</button>
+                <div className="editor-btn-container">
+                    <button type="submit" className="editor-btn save-btn">Save</button>
+                    <button type="button" className="editor-btn close-btn" onClick={() => close()}>Close</button>
+                </div>
             </form>
-            <button type="button" onClick={() => close()}>Close</button>
+            {saved && <p className="saved-message">Saved</p>}
         </Fragment>
     );
 }

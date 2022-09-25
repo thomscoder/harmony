@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 import './App.css'
 import {initWasm, startGo} from '../actions/wasmReader'
 import { Editor } from './components/Editor';
@@ -13,6 +13,10 @@ function App() {
   const [editorContent, setEditorContent] = useState<string>('');
   const [virtualFileCreation, setVirtualFileCreation] = useState<string>('');
   const [openFile, setOpenFile] = useState<string>('');
+  const [disableAll, setDisableAll] = useState<boolean>(false);
+  const [disableFileCreation, setDisableFileCreation] = useState<boolean>(false);
+
+  const fileCreationInput = useRef(null);
 
   const saveChanges = (content: string) => {
     console.log(content, openFile)
@@ -70,31 +74,54 @@ function App() {
   }, [fileContent])
 
   useEffect(() => {
+    const body = document.body;
+    if (!!openFile) {
+      body.classList.add("editor-open");
+      setDisableAll(true);
+    } else {
+      body.classList.remove("editor-open");
+      setDisableAll(false);
+    }
+  }, [openFile])
 
-  }, [virtualFiles])
+  useEffect(() => {
+    if (!!virtualFileCreation) {
+      setDisableFileCreation(false);
+    } else {
+      setDisableFileCreation(true);
+    }
+
+  }, [virtualFileCreation])
 
   return (
     <Fragment>
-      <input type="file" id="file-selector"/>
-      <p>or</p>
-        <>
+      <div className="file-selectors-wrapper">
+        <h1>Nova</h1>
+        <label className="custom-file-upload">
+          <input type="file" id="file-selector" disabled={disableAll}/>
+          Upload file
+        </label>
+        <p>or</p>
+        <div>
           <form onSubmit={(e) => {
             e.preventDefault();
             const created = startGoWrapper(virtualFileCreation);
             setVirtualFiles(created.split(" "));
+            (fileCreationInput.current! as HTMLInputElement).value = '';
           }}>
-            <input type="text" id="create-file-by-name" name="create-file-by-name" placeholder="e.g. example.txt" onChange={(e) => {
+            <input ref={fileCreationInput} type="text" id="create-file-by-name" name="create-file-by-name" placeholder="e.g. example.txt" onChange={(e) => {
               setVirtualFileCreation(e.target.value);
             }} />
-            <button type="submit" id="create-file-btn">Create virtual File</button>
+            <button type="submit" id="create-file-btn" disabled={disableAll || disableFileCreation}>Create file</button>
           </form>
-        </>
+        </div>
+      </div>
       <div className="App">
-        <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+        <div className="files-area" style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
           {virtualFiles.map((virtualFile, index) => {
             return (
               <div key={index} className="file">
-                <img src={fileImage} alt="file" onDoubleClick={() => {
+                <img className="file-image" src={fileImage} alt="file" onDoubleClick={() => {
                   // @ts-ignore
                   setEditorContent(openVirtualFile(virtualFile))
                   setOpenFile(virtualFile);
@@ -104,7 +131,11 @@ function App() {
             )
           })}
         </div>
-        {openFile && !!editorContent && <Editor text={editorContent} save={saveChanges} close={closeEditor} />}
+        {openFile && !!editorContent && 
+          <div className="nova-editor">
+            <Editor text={editorContent} save={saveChanges} close={closeEditor} />
+          </div>
+        }
       </div>
     </Fragment>
   )

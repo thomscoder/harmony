@@ -2,47 +2,97 @@
   width: 100%;
   margin: 0 auto;
   padding: 2rem;
+  height: 80vh;
+}
+
+h1 {
+  text-align: center;
+  color: #ffac4b;
+}
+
+.file-selectors-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.file-image {
+  width: 15%;
 }
 
 .App {
   text-align: center;
 }
 
-.react-monaco-editor-container {
+#create-file-by-name {
+  background-color: #343436;
+  padding: .6em;
+  border: 1px solid #fda2d5;
+  color: white;
+}
+
+#create-file-by-name:focus {
+  outline: none;
+}
+
+#create-file-btn {
+  padding: .4em 1em;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border: 1px solid #fda2d5;
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+.files-area {
+  margin-top: 2em;
+}
+
+.nova-editor {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.nova-editor form {
+  margin: auto;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+
+.nova-editor form .react-monaco-editor-container {
+  width: 100% !important;
   text-align: initial;
+  margin: auto;
+  border: .3px solid white;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.nova-editor .saved-message {
+  color: white;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.nova-editor form .editor-btn-container button, #create-file-btn {
+  background-color: #1e1e1e;
+  color: white;
+  border: .3px solid white;
+  border-radius: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.nova-editor form .editor-btn-container button:hover, #create-file-btn:hover {
+  background-color: #44d6ff;
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}

@@ -30,6 +30,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #1e1e1e;
+  color: white;
+}
+
+body.editor-open {
+  background-color: rgba(0, 0, 0, 0.84);
 }
 
 h1 {

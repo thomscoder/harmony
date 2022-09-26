@@ -6,13 +6,10 @@ import (
 	"nova/texts"
 	nova "nova/virtual"
 	"syscall/js"
-
-	"github.com/go-git/go-billy/v5"
 )
 
 var novaStore nova.NovaStore = nova.NovaStore{}
-var store, err = novaStore.CreateStore()
-var file billy.File
+var store, storer = novaStore.CreateStore()
 
 type Files struct {
 	Files []File `json:"files"`

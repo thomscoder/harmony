@@ -5,7 +5,6 @@ import (
 	"io"
 	"log"
 
-	//"nova/editor"
 	"nova/texts"
 	"os"
 	"strings"
@@ -20,7 +19,6 @@ import (
 func createVirtualSystem() (billy.Filesystem, *memory.Storage) {
 	storer := memory.NewStorage()
 	novaFs := memfs.New()
-	//virtualGit(storer, novaFs, url)
 	return novaFs, storer
 }
 
@@ -83,35 +81,3 @@ func fileLastModification(store billy.Filesystem) map[string]string {
 func craftScreenshotMessage(store billy.Filesystem, wt *git.Worktree) string {
 	return texts.Screenshot
 }
-
-// func createBranch(repo *git.Repository, branchName string) error {
-// 	exists := false
-// 	wt, _ := repo.Worktree()
-// 	branches, _ := repo.Branches()
-// 	branches.ForEach(func(branch *plumbing.Reference) error {
-// 		if branch.Name().Short() == branchName {
-// 			exists = true
-// 			err := wt.Checkout(&git.CheckoutOptions{
-// 				Create: false,
-// 				Force:  false,
-// 				Branch: plumbing.NewBranchReferenceName(branchName),
-// 			})
-// 			if err != nil {
-// 				return err
-// 			}
-// 			return nil
-// 		}
-// 		return nil
-// 	})
-// 	if exists == false {
-// 		err := wt.Checkout(&git.CheckoutOptions{
-// 			Create: true,
-// 			Force:  false,
-// 			Branch: plumbing.NewBranchReferenceName(branchName),
-// 		})
-// 		if err != nil {
-// 			return err
-// 		}
-// 	}
-// 	return nil
-// }

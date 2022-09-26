@@ -1,6 +1,7 @@
 package virtual
 
 import (
+	"fmt"
 	"log"
 	"nova/texts"
 
@@ -54,4 +55,29 @@ func (ns *NovaStore) Save(store billy.Filesystem, filename string, content strin
 
 func (ns *NovaStore) GetFileContent(store billy.Filesystem, fileName string) string {
 	return readFileContent(store, fileName)
+}
+
+func (ns *NovaStore) SetBranch(repo *git.Repository) {
+	currentBranch, err := repo.Head()
+	if err != nil {
+		log.Fatal(err)
+	}
+	ns.CurrentBranch = currentBranch
+}
+
+func (ns *NovaStore) Screenshot(store billy.Filesystem, wt *git.Worktree, repo *git.Repository) error {
+	files, _ := store.ReadDir(texts.CurrentDirectory)
+	fmt.Println(repo.Head())
+	for _, file := range files {
+		wt.Add(file.Name())
+	}
+	status, _ := wt.Status()
+	hash, err := wt.Commit("hey", &git.CommitOptions{})
+	fmt.Println(status, hash)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return err
+	}
+	return nil
 }

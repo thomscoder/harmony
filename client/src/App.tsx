@@ -157,6 +157,10 @@ function App() {
             );
           })}
         </div>
+        <button type="button" onClick={() => {
+          // @ts-ignore
+          console.log(virtualCommit())
+        }}>Commit</button>
         {openFile && !!editorContent && (
           <div className="nova-editor">
             <Editor text={editorContent} save={saveChanges} close={closeEditor} filename={openFile} />

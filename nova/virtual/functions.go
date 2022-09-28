@@ -21,9 +21,10 @@ func createVirtualSystem() (billy.Filesystem, *memory.Storage) {
 	storer := memory.NewStorage()
 	novaFs := memfs.New()
 
-	git.Clone(storer, novaFs, &git.CloneOptions{
-		URL: "/api/thomscoder/orchestra.git",
+	repo, _ := git.Clone(storer, novaFs, &git.CloneOptions{
+		URL: "http://0.0.0.0:5000/https://github.com/thomscoder/orchestra.git",
 	})
+	fmt.Println(repo.Head())
 	return novaFs, storer
 }
 

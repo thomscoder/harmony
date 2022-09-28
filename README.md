@@ -13,4 +13,17 @@ Either upload or create one or multiple new files, double click to open and star
 
 <img src="https://i.ibb.co/gy07sQ3/Schermata-2022-09-25-alle-16-40-12.png" width=80% />
 
+# Features
+
+Harmony now supports commits and branches.
+
+Create branches, 
+create files, 
+upload files, 
+change them, 
+save them, 
+commit them, 
+switch branches, 
+repeat.
+
 Simply refresh the page to restart anew.

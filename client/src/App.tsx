@@ -4,6 +4,7 @@ import { startGo } from '../actions/wasmReader';
 import { Editor } from './components/Editor';
 import { GrDocumentText as DocumentIcon } from '@react-icons/all-files/gr/GrDocumentText';
 import { AiFillGithub as GithubIcon} from '@react-icons/all-files/ai/AiFillGithub';
+import Repository from './components/Repository';
 
 function App() {
   const [file, setFile] = useState<File>();
@@ -157,10 +158,7 @@ function App() {
             );
           })}
         </div>
-        <button type="button" onClick={() => {
-          // @ts-ignore
-          console.log(virtualCommit())
-        }}>Commit</button>
+        <Repository />
         {openFile && !!editorContent && (
           <div className="nova-editor">
             <Editor text={editorContent} save={saveChanges} close={closeEditor} filename={openFile} />

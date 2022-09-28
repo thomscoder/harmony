@@ -9,6 +9,7 @@ import (
 	"github.com/go-git/go-billy/v5/util"
 	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
+	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/go-git/go-git/v5/storage/memory"
 )
 
@@ -65,19 +66,23 @@ func (ns *NovaStore) SetBranch(repo *git.Repository) {
 	ns.CurrentBranch = currentBranch
 }
 
-func (ns *NovaStore) Screenshot(store billy.Filesystem, wt *git.Worktree, repo *git.Repository) error {
+func (ns *NovaStore) Screenshot(store billy.Filesystem, wt *git.Worktree, msg string) string {
 	files, _ := store.ReadDir(texts.CurrentDirectory)
-	fmt.Println(repo.Head())
+
 	for _, file := range files {
 		wt.Add(file.Name())
 	}
-	status, _ := wt.Status()
-	hash, err := wt.Commit("hey", &git.CommitOptions{})
-	fmt.Println(status, hash)
+
+	hash, err := wt.Commit(msg, &git.CommitOptions{
+		Author: &object.Signature{
+			Name:  "Nova Harmony",
+			Email: "nova@harmony.com",
+		},
+	})
 
 	if err != nil {
 		fmt.Println(err.Error())
-		return err
+		return "Couldn't commit"
 	}
-	return nil
+	return hash.String()
 }

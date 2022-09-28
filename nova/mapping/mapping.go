@@ -9,7 +9,6 @@ import (
 	"syscall/js"
 
 	"github.com/go-git/go-git/v5"
-	"github.com/go-git/go-git/v5/plumbing"
 )
 
 var novaStore nova.NovaStore = nova.NovaStore{}
@@ -61,23 +60,14 @@ func VirtualCommit() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		repository, err := git.Open(storer, store)
 		wt, _ := repository.Worktree()
-		fmt.Println(wt.Status())
+
+		commitMsg := args[0].String()
+
 		if err != nil {
-			fmt.Println("fuck", err.Error())
+			fmt.Println(err.Error())
 			return err.Error()
 		}
-		fmt.Println(novaStore.GetFiles(store, texts.CurrentDirectory))
-		e := wt.Checkout(&git.CheckoutOptions{
-			Create: true,
-			Force:  false,
-			Branch: plumbing.NewBranchReferenceName("fuck"),
-		})
-		if e != nil {
-			fmt.Println("what", e.Error())
-			return e.Error()
-		}
-
-		return "ciao"
+		return novaStore.Screenshot(store, wt, commitMsg)
 	})
 }
 

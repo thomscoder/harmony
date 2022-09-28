@@ -7,7 +7,6 @@ import (
 
 	"github.com/go-git/go-billy/v5"
 	"github.com/go-git/go-billy/v5/util"
-	"github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/go-git/go-git/v5/storage/memory"
@@ -15,12 +14,12 @@ import (
 
 type StoreInterface interface {
 	SetWatcher(billy.Filesystem) map[string]string
-	CreateStore(string)
-	Screenshot(billy.Filesystem, *git.Worktree)
+	CreateStore() (billy.Filesystem, *memory.Storage)
 	GetFiles(billy.Filesystem, string)
 	CreateFiles(billy.Filesystem, string)
-	SetBranch(*git.Repository)
-	GetStatus(*git.Worktree) git.Status
+	OpenFile(store billy.Filesystem, fileName string)
+	Save(store billy.Filesystem, filename string, content string)
+	GetFileContent(store billy.Filesystem, fileName string)
 }
 type NovaStore struct {
 	Watcher       map[string]string

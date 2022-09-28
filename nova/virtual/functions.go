@@ -5,7 +5,6 @@ import (
 	"io"
 	"log"
 
-	//"nova/editor"
 	"nova/texts"
 	"os"
 	"strings"

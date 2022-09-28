@@ -3,8 +3,10 @@ import './App.css';
 import { startGo } from '../actions/wasmReader';
 import { Editor } from './components/Editor';
 import { GrDocumentText as DocumentIcon } from '@react-icons/all-files/gr/GrDocumentText';
-import { AiFillGithub as GithubIcon} from '@react-icons/all-files/ai/AiFillGithub';
 import Repository from './components/Repository';
+import { AiFillGithub as GithubIcon } from '@react-icons/all-files/ai/AiFillGithub';
+import { FaQuestionCircle as QuestionIcon } from '@react-icons/all-files/fa/FaQuestionCircle';
+import ReactTooltip from 'react-tooltip';
 
 function App() {
   const [file, setFile] = useState<File>();
@@ -104,8 +106,24 @@ function App() {
   return (
     <Fragment>
       <h1>Harmony ✨</h1>
+      <a style={{ color: 'white' }} data-tip="custom show" data-event="click focus">
+        <QuestionIcon />
+      </a>
+      <ReactTooltip place="left" globalEventOff="click">
+        Create and/or modify local files, on the fly!
+        <br />
+        Create/import multiple files Click a file to edit it
+        <br />
+        and jump between them
+        <br />
+        without losing your changes.
+      </ReactTooltip>
       <div id="layer"></div>
-      <div id="github"><a href="https://github.com/thomscoder/harmony" target="_blank"><GithubIcon size={30} /></a></div>
+      <div id="github">
+        <a href="https://github.com/thomscoder/harmony" target="_blank">
+          <GithubIcon size={30} />
+        </a>
+      </div>
       <div className="file-selectors-wrapper">
         <label className="custom-file-upload">
           <input type="file" id="file-selector" disabled={disableAll} />
@@ -144,7 +162,7 @@ function App() {
               <div key={index} className={`virtual-file-wrapper ${!!prevOpenedFiles.find((f) => f === virtualFile) ? 'modified' : ''}`}>
                 <DocumentIcon
                   size={60}
-                  onDoubleClick={() => {
+                  onClick={() => {
                     // @ts-ignore
                     setEditorContent(openVirtualFile(virtualFile));
                     setOpenFile(virtualFile);

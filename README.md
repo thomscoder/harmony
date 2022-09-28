@@ -7,7 +7,7 @@ Quickly upload, create, open, read, modify and download files in the browser (no
 > Just me experimenting with WebAssembly.
 <br/>
 
-Harmony implements via WebAssembly a virtual file system in Go (a revisited version of my <a href="https://github.com/thomscoder/nova" target="_blank">Nova</a> project) where all the file operations happen. 
+Harmony implements via WebAssembly a virtual file system in Go (a revisited version of my <a href="https://github.com/thomscoder/nova-git" target="_blank">Nova</a> project) where all the file operations happen. 
 
 Either upload or create one or multiple new files, double click to open and start modifying, copy the entire file content in one click.
 

@@ -52,6 +52,7 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
   const [fileExt, setFileExt] = useState<string>('');
   const [copied, setCopied] = useState<boolean>(false);
   const [downloader, setDownloader] = useState<boolean>(false);
+  const [editorUri, setEditorUri] = useState<monaco.Uri>();
 
   const textSaver = (e: any) => {
     e.preventDefault();
@@ -63,6 +64,7 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
     MonacoServices.install(monaco as any);
     if (editor && editor.getModel()) {
       const editorModel = editor.getModel();
+      setEditorUri(editorModel?.uri);
       if (editorModel) {
         editorModel.setValue(text);
       }
@@ -91,11 +93,11 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
   };
 
   const download = (text: string, name: string, type: string) => {
-    var a = document.getElementById("downloader") as any;
-    var file = new Blob([text], {type: type});
+    var a = document.getElementById('downloader') as any;
+    var file = new Blob([text], { type: type });
     a.href = URL.createObjectURL(file);
     a.download = name;
-  }
+  };
 
   return (
     <Fragment>
@@ -117,21 +119,41 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
           <button type="submit" className="editor-btn save-btn">
             Save
           </button>
-          <a href="" id="downloader" style={{
-            display: !downloader ? 'none' : 'inline-block',
-          }}>Download</a>
-          {!downloader &&
-            <button type="button" onClick={() => {
-              download(writtenText, filename, 'text/plain')
-              setDownloader(true);
-            }}>Prepare download</button>
-          }
+          <button
+            type="button"
+            onClick={() => {
+              const editorModel = monaco.editor.getModel(editorUri as monaco.Uri);
+              editorModel?.setValue('');
+            }}
+          >
+            Clear
+          </button>
+          <a
+            href=""
+            id="downloader"
+            style={{
+              display: !downloader ? 'none' : 'inline-block',
+            }}
+          >
+            Download
+          </a>
+          {!downloader && (
+            <button
+              type="button"
+              onClick={() => {
+                download(writtenText, filename, 'text/plain');
+                setDownloader(true);
+              }}
+            >
+              Prepare download
+            </button>
+          )}
           <button type="button" className="editor-btn close-btn" onClick={() => close()}>
             Close
           </button>
         </div>
       </form>
-      {saved && <p className="saved-message">Saved</p>}
+      {saved && !!writtenText ? <p className="saved-message">Saved</p> : saved && <p className="saved-message">Add some text to save!</p>}
       {copied && <p className="saved-message">Copied</p>}
     </Fragment>
   );

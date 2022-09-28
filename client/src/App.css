@@ -20,6 +20,12 @@ h1 {
   color: #ffac4b;
 }
 
+h1 + a {
+  position: absolute;
+  top: 6em;
+  right: 2.3em;
+}
+
 .file-selectors-wrapper {
   display: flex;
   flex-direction: column;
@@ -114,7 +120,8 @@ input[type='file'] {
 }
 
 .nova-editor form .editor-btn-container button,
-#create-file-btn, #downloader {
+#create-file-btn,
+#downloader {
   background-color: #1e1e1e;
   color: white;
   border: 0.3px solid white;
@@ -122,22 +129,23 @@ input[type='file'] {
 }
 
 .nova-editor form .editor-btn-container button:hover,
-#create-file-btn, #downloader:hover {
+#create-file-btn,
+#downloader:hover {
   background-color: #44d6ff;
 }
 
 #downloader {
-  padding: .53em 1em;
+  padding: 0.53em 1em;
   background-color: #ffac4b;
 }
 
-
 @media screen and (max-width: 768px) {
-  .file-selectors p+div form {
+  .file-selectors p + div form {
     text-align: center;
   }
   .nova-editor form .editor-btn-container button,
-  #create-file-btn, #downloader {
-  padding: .4em;
-}
+  #create-file-btn,
+  #downloader {
+    padding: 0.4em;
+  }
 }

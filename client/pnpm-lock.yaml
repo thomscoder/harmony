@@ -15,6 +15,7 @@ specifiers:
   react-monaco-editor: ^0.50.1
   react-select: ^5.4.0
   react-tooltip: ^4.2.21
+  recoil: ^0.7.5
   typescript: ^4.6.4
   vite: ^3.1.0
   vscode-oniguruma: ^1.6.2
@@ -32,6 +33,7 @@ dependencies:
   react-monaco-editor: 0.50.1_uyf53jp3lmzmat2ssjsud325z4
   react-select: 5.4.0_gh7jwvvgp2fodlhsbspbg5vef4
   react-tooltip: 4.2.21_biqbaboplfbrettd7655fr4n2y
+  recoil: 0.7.5_biqbaboplfbrettd7655fr4n2y
   vscode-oniguruma: 1.6.2
   vscode-textmate: 7.0.1
 
@@ -879,6 +881,10 @@ packages:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
     engines: {node: '>=4'}
 
+  /hamt_plus/1.0.2:
+    resolution: {integrity: sha512-t2JXKaehnMb9paaYA7J0BX8QQAY8lwfQ9Gjf4pg/mk4krt+cmwmU652HOoWonf+7+EQV97ARPMhhVgU1ra2GhA==}
+    dev: false
+
   /has-flag/3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
     engines: {node: '>=4'}
@@ -1126,6 +1132,23 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
+
+  /recoil/0.7.5_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-GVShsj5+M/2GULWBs5WBJGcsNis/d3YvDiaKjYh3mLKXftjtmk9kfaQ8jwjoIXySCwn8/RhgJ4Sshwgzj2UpFA==}
+    peerDependencies:
+      react: '>=16.13.1'
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+    dependencies:
+      hamt_plus: 1.0.2
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /regenerator-runtime/0.13.9:

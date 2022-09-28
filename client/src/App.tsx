@@ -7,11 +7,16 @@ import Repository from './components/Repository';
 import { AiFillGithub as GithubIcon } from '@react-icons/all-files/ai/AiFillGithub';
 import { FaQuestionCircle as QuestionIcon } from '@react-icons/all-files/fa/FaQuestionCircle';
 import ReactTooltip from 'react-tooltip';
+import { useRecoilState, useRecoilValue } from 'recoil';
+
+import { virtualFilesState, virtualBranchState } from './atoms/atoms';
 
 function App() {
+  const [virtualFiles, setVirtualFiles] = useRecoilState(virtualFilesState);
+  const virtualBranch = useRecoilValue(virtualBranchState);
+
   const [file, setFile] = useState<File>();
   const [fileContent, setFileContent] = useState<any>();
-  const [virtualFiles, setVirtualFiles] = useState([]);
   const [editorContent, setEditorContent] = useState<string>('');
   const [virtualFileCreation, setVirtualFileCreation] = useState<string>('');
   const [openFile, setOpenFile] = useState<string>('');
@@ -53,9 +58,6 @@ function App() {
     );
   };
 
-  const changeFilesOnCheckout = (files: any) => {
-    return setVirtualFiles(files);
-  }
 
   useEffect(() => {
     const fileSelector = document.getElementById('file-selector') as HTMLInputElement;
@@ -136,7 +138,7 @@ function App() {
       </div>
       <div className="file-selectors-wrapper">
         <label className="custom-file-upload">
-          <input type="file" id="file-selector" disabled={disableAll} />
+          <input type="file" id="file-selector" disabled={disableAll || !!virtualBranch === false} />
           Upload file
         </label>
         <p>or</p>
@@ -150,6 +152,7 @@ function App() {
             }}
           >
             <input
+              disabled={!!virtualBranch === false}
               ref={fileCreationInput}
               type="text"
               id="create-file-by-name"
@@ -186,7 +189,7 @@ function App() {
             );
           })}
         </div>
-        <Repository changeFilesOnCheckout={changeFilesOnCheckout} />
+        <Repository />
         {openFile && !!editorContent && (
           <div className="nova-editor">
             <Editor text={editorContent} save={saveChanges} close={closeEditor} filename={openFile} />

@@ -20,6 +20,7 @@
     "react-monaco-editor": "^0.50.1",
     "react-select": "^5.4.0",
     "react-tooltip": "^4.2.21",
+    "recoil": "^0.7.5",
     "vscode-oniguruma": "^1.6.2",
     "vscode-textmate": "^7.0.1"
   },

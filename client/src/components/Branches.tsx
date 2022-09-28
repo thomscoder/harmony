@@ -1,8 +1,13 @@
 
 import "./styles/Branches.css"
 import { useEffect, useRef, useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { virtualFilesState, virtualBranchState } from '../atoms/atoms';
 
-const Branches = ({changeFilesOnCheckout}: {changeFilesOnCheckout: any}) => {
+const Branches = () => {
+    const setVirtualFiles = useSetRecoilState(virtualFilesState);
+    const setVirtualBranch = useSetRecoilState(virtualBranchState);
+
     const [currentBranch, setCurrentBranch] = useState<string>('');
     const [branchName, setBranchName] = useState<string>('');
     const inputBranchRef = useRef(null);
@@ -10,11 +15,13 @@ const Branches = ({changeFilesOnCheckout}: {changeFilesOnCheckout: any}) => {
     useEffect(() => {
         if (!!branchName) {
             // @ts-ignore
-            changeFilesOnCheckout(getVirtualFiles().split(" "))
+            setVirtualFiles(getVirtualFiles().split(" "));
+            setVirtualBranch(branchName);
         }
     }, [currentBranch])
     const addBranchHandler = (e: any) => {
         e.preventDefault();
+        (inputBranchRef.current! as HTMLInputElement).value = ''
         // @ts-ignore
         setCurrentBranch(goToBranch(branchName));
     } 

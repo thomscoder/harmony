@@ -1,0 +1,10 @@
+.add-branches {
+    position: absolute;
+    bottom: 4em;
+    right: 2em;
+    cursor: pointer;
+}
+
+.add-branches svg path {
+    fill: #ffac4b;
+}

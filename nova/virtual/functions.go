@@ -13,6 +13,7 @@ import (
 	"github.com/go-git/go-billy/v5/memfs"
 	"github.com/go-git/go-billy/v5/util"
 	"github.com/go-git/go-git/v5"
+	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/storage/memory"
 )
 
@@ -85,4 +86,36 @@ func fileLastModification(store billy.Filesystem) map[string]string {
 
 func craftScreenshotMessage(store billy.Filesystem, wt *git.Worktree) string {
 	return texts.Screenshot
+}
+
+func createBranch(repo *git.Repository, branchName string) error {
+	exists := false
+	wt, _ := repo.Worktree()
+	branches, _ := repo.Branches()
+	branches.ForEach(func(branch *plumbing.Reference) error {
+		if branch.Name().Short() == branchName {
+			exists = true
+			err := wt.Checkout(&git.CheckoutOptions{
+				Create: false,
+				Force:  false,
+				Branch: plumbing.NewBranchReferenceName(branchName),
+			})
+			if err != nil {
+				return err
+			}
+			return nil
+		}
+		return nil
+	})
+	if exists == false {
+		err := wt.Checkout(&git.CheckoutOptions{
+			Create: true,
+			Force:  false,
+			Branch: plumbing.NewBranchReferenceName(branchName),
+		})
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }

@@ -1,0 +1,23 @@
+.last-commit p {
+    font-size: .7em;
+}
+.commit-msg-input {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.4em;
+    background-color: black;
+    border: .7px solid #44d6ff;
+    color: white;
+}
+
+.commit-msg-input:focus {
+    outline: none;
+}
+
+@media screen and (max-width: 768px) {
+    .last-commit p {
+        font-size: .5em;
+    }
+}

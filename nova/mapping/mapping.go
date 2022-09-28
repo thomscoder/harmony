@@ -14,6 +14,18 @@ import (
 var novaStore nova.NovaStore = nova.NovaStore{}
 var store, storer = novaStore.CreateStore()
 
+var repository, err = git.Open(storer, store)
+
+func branchSetter(repo *git.Repository) error {
+	novaStore.SetBranch(repo)
+	return nil
+
+}
+
+var branchSetted = branchSetter(repository)
+
+var commitsHistory = make(map[string]string)
+
 type Files struct {
 	Files []File `json:"files"`
 }
@@ -56,9 +68,14 @@ func SaveVirtualFile() js.Func {
 	})
 }
 
+func GetCurrentBranch() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		return novaStore.CurrentBranch.Name().Short()
+	})
+}
+
 func VirtualCommit() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
-		repository, err := git.Open(storer, store)
 		wt, _ := repository.Worktree()
 
 		commitMsg := args[0].String()
@@ -67,7 +84,13 @@ func VirtualCommit() js.Func {
 			fmt.Println(err.Error())
 			return err.Error()
 		}
-		return novaStore.Screenshot(store, wt, commitMsg)
+		hash := novaStore.Screenshot(store, wt, commitMsg)
+		if hash != "" {
+			commitsHistory[commitMsg] = hash
+		}
+
+		commitsToJson, _ := json.Marshal(commitsHistory)
+		return string(commitsToJson)
 	})
 }
 
@@ -75,7 +98,6 @@ func InitProject() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		filename, content := jsonReader([]byte(args[0].String()))
 		fmt.Println(novaStore.GetFiles(store, texts.CurrentDirectory))
-		repository, _ := git.Open(storer, store)
 		novaStore.SetBranch(repository)
 		if len(filename) == 0 {
 			return texts.HtmlEmptyStringMsg

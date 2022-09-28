@@ -86,3 +86,12 @@ func (ns *NovaStore) Screenshot(store billy.Filesystem, wt *git.Worktree, msg st
 	}
 	return hash.String()
 }
+
+func (ns *NovaStore) GotoBranch(repo *git.Repository, branchName string) error {
+	err := createBranch(repo, branchName)
+	if err != nil {
+		return err
+	}
+	ns.SetBranch(repo)
+	return nil
+}

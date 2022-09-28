@@ -93,6 +93,7 @@ func createBranch(repo *git.Repository, branchName string) error {
 	wt, _ := repo.Worktree()
 	branches, _ := repo.Branches()
 	branches.ForEach(func(branch *plumbing.Reference) error {
+
 		if branch.Name().Short() == branchName {
 			exists = true
 			err := wt.Checkout(&git.CheckoutOptions{

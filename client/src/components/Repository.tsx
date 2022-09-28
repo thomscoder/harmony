@@ -1,11 +1,11 @@
 import Branches from "./Branches"
 import Commit from "./Commits"
 
-const Repository = () => {
+const Repository = ({changeFilesOnCheckout}: {changeFilesOnCheckout: any}) => {
     return (
         <>
         <Commit />
-        <Branches/>
+        <Branches changeFilesOnCheckout={changeFilesOnCheckout} />
         </>
     )
 }

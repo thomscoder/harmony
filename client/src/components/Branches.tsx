@@ -1,28 +1,31 @@
-import {AiOutlinePlusCircle as PlusSquare} from '@react-icons/all-files/ai/AiOutlinePlusCircle';
+
 import "./styles/Branches.css"
-import Select from 'react-select';
 import { useEffect, useRef, useState } from 'react';
 
-const Branches = () => {
+const Branches = ({changeFilesOnCheckout}: {changeFilesOnCheckout: any}) => {
     const [currentBranch, setCurrentBranch] = useState<string>('');
+    const [branchName, setBranchName] = useState<string>('');
+    const inputBranchRef = useRef(null);
 
     useEffect(() => {
+        if (!!branchName) {
+            // @ts-ignore
+            changeFilesOnCheckout(getVirtualFiles().split(" "))
+        }
+    }, [currentBranch])
+    const addBranchHandler = (e: any) => {
+        e.preventDefault();
         // @ts-ignore
-        setCurrentBranch(getCurrentBranch());
-    }, [])
-    const addBranchHandler = () => {
-
+        setCurrentBranch(goToBranch(branchName));
     } 
-    const options = [
-        { value: 'chocolate', label: 'Chocolate' },
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' }
-    ]
+
     return (
         <>
             <div className="add-branches">
-                <PlusSquare size={35} onClick={addBranchHandler} />
-                <p>{currentBranch}</p>
+                <form onSubmit={addBranchHandler} className="branch-creation-form">
+                    <input ref={inputBranchRef} name="branch-name" type="text" placeholder="Branch name - Press Enter to submit" className="branch-name-input" onChange={(e) => setBranchName(e.target.value)}/>
+                    <span className="current-branch-name">{currentBranch}</span>
+                </form>
             </div>
         </>
     )

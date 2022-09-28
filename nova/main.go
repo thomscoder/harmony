@@ -12,5 +12,7 @@ func main() {
 	js.Global().Set("saveVirtualFile", mapping.SaveVirtualFile())
 	js.Global().Set("virtualCommit", mapping.VirtualCommit())
 	js.Global().Set("getCurrentBranch", mapping.GetCurrentBranch())
+	js.Global().Set("getVirtualFiles", mapping.GetVirtualFiles())
+	js.Global().Set("goToBranch", mapping.GoToBranch())
 	<-ch
 }

@@ -14,8 +14,7 @@ func Init(ns ns.NovaStore, store billy.Filesystem, filename string, content stri
 	ns.OpenFile(store, filename)
 	ns.Save(store, filename, content)
 	filenames := ns.GetFiles(store, texts.CurrentDirectory)
-	fmt.Println(filenames)
-	//ns.GetFileContent(store, filename)
+
 	return strings.Join(filenames, " ")
 }
 

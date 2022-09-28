@@ -53,6 +53,10 @@ function App() {
     );
   };
 
+  const changeFilesOnCheckout = (files: any) => {
+    return setVirtualFiles(files);
+  }
+
   useEffect(() => {
     const fileSelector = document.getElementById('file-selector') as HTMLInputElement;
     fileSelector.addEventListener('change', (event) => {
@@ -60,7 +64,13 @@ function App() {
       const fileList = event?.target!.files;
       setFile(fileList[0]);
     });
+
   }, []);
+
+  // useEffect(() => {
+  //   // @ts-ignore
+  //     if (window.getDefaultFiles) setVirtualFiles(window.getDefaultFiles().split(" "))
+  // }, [window.getDefaultFiles])
 
   useEffect(() => {
     if (file) {
@@ -107,9 +117,9 @@ function App() {
     <Fragment>
       <h1>Harmony ✨</h1>
       <a style={{ color: 'white' }} data-tip="custom show" data-event="click focus">
-        <QuestionIcon />
+        <QuestionIcon size={19} />
       </a>
-      <ReactTooltip place="left" globalEventOff="click">
+      <ReactTooltip place="bottom" globalEventOff="click">
         Create and/or modify local files, on the fly!
         <br />
         Create/import multiple files Click a file to edit it
@@ -121,7 +131,7 @@ function App() {
       <div id="layer"></div>
       <div id="github">
         <a href="https://github.com/thomscoder/harmony" target="_blank">
-          <GithubIcon size={30} />
+          <GithubIcon size={20} />
         </a>
       </div>
       <div className="file-selectors-wrapper">
@@ -176,7 +186,7 @@ function App() {
             );
           })}
         </div>
-        <Repository />
+        <Repository changeFilesOnCheckout={changeFilesOnCheckout} />
         {openFile && !!editorContent && (
           <div className="nova-editor">
             <Editor text={editorContent} save={saveChanges} close={closeEditor} filename={openFile} />

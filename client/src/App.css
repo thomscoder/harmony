@@ -7,8 +7,9 @@
 
 #github {
   position: absolute;
-  top: 2em;
-  right: 2em;
+  top: 3em;
+  right: 1em;
+  opacity: .1;
 }
 
 #github a {
@@ -22,8 +23,9 @@ h1 {
 
 h1 + a {
   position: absolute;
-  top: 6em;
-  right: 2.3em;
+  top: 3em;
+  right: 3em;
+  opacity: .1;
 }
 
 .file-selectors-wrapper {

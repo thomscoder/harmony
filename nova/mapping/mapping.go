@@ -6,6 +6,7 @@ import (
 	"nova/handlers"
 	"nova/texts"
 	nova "nova/virtual"
+	"strings"
 	"syscall/js"
 
 	"github.com/go-git/go-git/v5"
@@ -15,14 +16,6 @@ var novaStore nova.NovaStore = nova.NovaStore{}
 var store, storer = novaStore.CreateStore()
 
 var repository, err = git.Open(storer, store)
-
-func branchSetter(repo *git.Repository) error {
-	novaStore.SetBranch(repo)
-	return nil
-
-}
-
-var branchSetted = branchSetter(repository)
 
 var commitsHistory = make(map[string]string)
 
@@ -97,11 +90,33 @@ func VirtualCommit() js.Func {
 func InitProject() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		filename, content := jsonReader([]byte(args[0].String()))
-		fmt.Println(novaStore.GetFiles(store, texts.CurrentDirectory))
+
 		novaStore.SetBranch(repository)
 		if len(filename) == 0 {
 			return texts.HtmlEmptyStringMsg
 		}
 		return handlers.Init(novaStore, store, filename, content)
+	})
+}
+
+func GetVirtualFiles() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		filenames := novaStore.GetFiles(store, texts.CurrentDirectory)
+
+		return strings.Join(filenames, " ")
+	})
+}
+
+func GoToBranch() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		branchName := args[0].String()
+		novaStore.SetBranch(repository)
+		_err := novaStore.GotoBranch(repository, branchName)
+		if _err != nil {
+
+			return _err
+		}
+
+		return novaStore.CurrentBranch.Name().Short()
 	})
 }

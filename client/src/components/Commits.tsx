@@ -10,7 +10,6 @@ const Commit = () => {
     }, [commits])
     return (
         <>
-            {commits && <div className="last-commit"><p className="commit">Last commit: {`${Object.keys(commits!)[Object.keys(commits!).length-1]} - ${Object.values(commits!)[Object.values(commits!).length-1]}`}</p></div>}
             <form className="commit-form" onSubmit={(e) => {
                 e.preventDefault();
                     // @ts-ignore

@@ -27,8 +27,18 @@
 .current-branch-name {
   position: fixed;
   top: 3em;
-  left: 0;
-  opacity: 0.3;
-  width: 100%;
+  left: 15%;
+  width: 70%;
   color: white;
+}
+
+span.branch-name {
+  opacity: 0.3;
+  padding: .3em;
+}
+
+span.active-branch {
+ 
+  opacity: .5;
+  font-weight: bold;
 }

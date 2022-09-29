@@ -48,6 +48,7 @@ function App() {
   return (
     <Fragment>
       <HomepageMisc />
+      <Repository />
       <Files disableAll={disableAll} />
       <div className="App">
         <div className="files-area">
@@ -62,7 +63,6 @@ function App() {
             );
           })}
         </div>
-        <Repository />
         {openFile && !!editorContent && (
           <div className="nova-editor">
             <Editor text={editorContent} save={saveChanges} close={closeEditor} filename={openFile} />

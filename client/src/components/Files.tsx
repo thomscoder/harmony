@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { createVirtualFilesWrapper } from '../../utils/goFunctions';
-import { virtualBranchState, virtualFilesState } from '../atoms/atoms';
+import { createVirtualBranchMessageState, virtualBranchState, virtualFilesState } from '../atoms/atoms';
 
 type Props = {
   disableAll: boolean;
@@ -10,6 +10,7 @@ type Props = {
 const Files = ({ disableAll }: Props) => {
   const setVirtualFiles = useSetRecoilState(virtualFilesState);
   const virtualBranch = useRecoilValue(virtualBranchState);
+  const setCreateVirtualBranchMessage = useSetRecoilState(createVirtualBranchMessageState);
 
   const [file, setFile] = useState<File>();
   const [fileContent, setFileContent] = useState<any>();
@@ -17,6 +18,19 @@ const Files = ({ disableAll }: Props) => {
   const [disableFileCreation, setDisableFileCreation] = useState<boolean>(false);
 
   const fileCreationInput = useRef(null);
+
+  const disabledInputClickHandler = () => {
+    if (!!virtualBranch === false) {
+      setCreateVirtualBranchMessage('Create or checkout to a branch');
+    }
+  }
+
+  const fileSelectorHandler = (e: any) => {
+    e.preventDefault();
+    const created = createVirtualFilesWrapper(virtualFileCreation);
+    setVirtualFiles(created.split(' '));
+    (fileCreationInput.current! as HTMLInputElement).value = '';
+  }
 
   useEffect(() => {
     const fileSelector = document.getElementById('file-selector') as HTMLInputElement;
@@ -60,19 +74,15 @@ const Files = ({ disableAll }: Props) => {
   return (
     <>
       <div className="file-selectors-wrapper">
-        <label className="custom-file-upload">
+        <label className="custom-file-upload" onClick={disabledInputClickHandler}>
           <input type="file" id="file-selector" disabled={disableAll || !!virtualBranch === false} />
           Upload file
         </label>
         <p>or</p>
         <div>
           <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              const created = createVirtualFilesWrapper(virtualFileCreation);
-              setVirtualFiles(created.split(' '));
-              (fileCreationInput.current! as HTMLInputElement).value = '';
-            }}
+            onSubmit={fileSelectorHandler}
+            onClick={disabledInputClickHandler}
           >
             <input
               disabled={!!virtualBranch === false}

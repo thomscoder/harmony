@@ -10,6 +10,7 @@ import (
 	"syscall/js"
 
 	"github.com/go-git/go-git/v5"
+	"github.com/go-git/go-git/v5/plumbing"
 )
 
 var novaStore nova.NovaStore = nova.NovaStore{}
@@ -70,6 +71,10 @@ func GetCurrentBranch() js.Func {
 func VirtualCommit() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		wt, _ := repository.Worktree()
+		status, err := wt.Status()
+		if status.String() == "" {
+			return ""
+		}
 
 		commitMsg := args[0].String()
 
@@ -80,10 +85,11 @@ func VirtualCommit() js.Func {
 		hash := novaStore.Screenshot(store, wt, commitMsg)
 		if hash != "" {
 			commitsHistory[commitMsg] = hash
+			commitsToJson, _ := json.Marshal(commitsHistory)
+			return string(commitsToJson)
 		}
+		return "err"
 
-		commitsToJson, _ := json.Marshal(commitsHistory)
-		return string(commitsToJson)
 	})
 }
 
@@ -109,14 +115,24 @@ func GetVirtualFiles() js.Func {
 
 func GoToBranch() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		var branches []string
+
 		branchName := args[0].String()
 		novaStore.SetBranch(repository)
 		_err := novaStore.GotoBranch(repository, branchName)
-		if _err != nil {
 
+		if _err != nil {
 			return _err
 		}
 
-		return novaStore.CurrentBranch.Name().Short()
+		_branches, branchesErr := repository.Branches()
+		if branchesErr != nil {
+			return branchesErr
+		}
+		_branches.ForEach(func(branch *plumbing.Reference) error {
+			branches = append(branches, branch.Name().Short())
+			return nil
+		})
+		return strings.Join(branches, " ")
 	})
 }

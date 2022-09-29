@@ -22,7 +22,7 @@ func createVirtualSystem() (billy.Filesystem, *memory.Storage) {
 	novaFs := memfs.New()
 
 	repo, _ := git.Clone(storer, novaFs, &git.CloneOptions{
-		URL: "http://0.0.0.0:5000/https://github.com/beyondNineFive/harmony.git",
+		URL: "https://github.com/thomscoder/harmony-bare.git",
 	})
 	fmt.Println(repo.Head())
 	return novaFs, storer

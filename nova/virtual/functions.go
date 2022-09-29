@@ -84,10 +84,6 @@ func fileLastModification(store billy.Filesystem) map[string]string {
 	return oldFiles
 }
 
-func craftScreenshotMessage(store billy.Filesystem, wt *git.Worktree) string {
-	return texts.Screenshot
-}
-
 func createBranch(repo *git.Repository, branchName string) error {
 	exists := false
 	wt, _ := repo.Worktree()

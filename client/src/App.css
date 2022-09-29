@@ -21,11 +21,33 @@ h1 {
   color: #ffac4b;
 }
 
-h1 + a {
+h1 + #guide {
+  padding: 0;
   position: absolute;
   top: 3em;
   right: 3em;
   opacity: 0.1;
+  background-color: transparent;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+h1 + #guide:hover, 
+h1 + #guid:focus {
+  outline: none;
+  border: 0;
+}
+
+.popup-content {
+  margin: auto;
+  background: black;
+  width: 200px;
+  padding: 1em;
+}
+.popup-arrow {
+  color: black;
 }
 
 .file-selectors-wrapper {

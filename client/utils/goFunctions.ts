@@ -39,6 +39,6 @@ export const virtualCommitWrapper = (commitMsg: string) => {
   try {
     return JSON.parse(commit);
   } catch (err) {
-    return "Worktree is empty or an error occured"
+    return "No file modifications found"
   }
 };

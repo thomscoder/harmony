@@ -39,7 +39,7 @@ const Branches = () => {
       <div className="add-branches">
         <form onSubmit={addBranchHandler} className="branch-creation-form">
           <input ref={inputBranchRef} name="branch-name" type="text" placeholder="Branch name - Press Enter to submit" className="branch-name-input" onChange={(e) => setBranchName(e.target.value)} />
-          <span className="current-branch-name">{!!virtualBranch === false ? <span className="branch-name">{createVirtualBranchMessage}</span> : 
+          <span className="current-branch-name">{!!virtualBranch === false ? <span className="branch-name create-before-proceeding">{createVirtualBranchMessage}</span> : 
             branches.map((branch, index) => {
               const active = branch === virtualBranch ? "active-branch" : '';
               return <span className={`branch-name ${active}`} onClick={() => {

@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"nova/texts"
 	ns "nova/virtual"
 	"strings"
@@ -16,11 +15,4 @@ func Init(ns ns.NovaStore, store billy.Filesystem, filename string, content stri
 	filenames := ns.GetFiles(store, texts.CurrentDirectory)
 
 	return strings.Join(filenames, " ")
-}
-
-func getInputs() string {
-	var repoToClone string
-	fmt.Printf("%s%s%s ", texts.CYAN, texts.RepositoryToClone, texts.RESET)
-	fmt.Scanf("%s", &repoToClone)
-	return repoToClone
 }

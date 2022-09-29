@@ -30,6 +30,9 @@
   left: 15%;
   width: 70%;
   color: white;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;
 }
 
 span.branch-name {
@@ -37,8 +40,19 @@ span.branch-name {
   padding: .3em;
 }
 
+span.create-before-proceeding {
+  opacity: .8;
+  color:#ffac4b;
+}
+
 span.active-branch {
- 
   opacity: .5;
   font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .current-branch-name {
+    left: 25%;
+    width: 50%;
+  }
 }

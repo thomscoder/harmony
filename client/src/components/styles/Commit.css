@@ -1,0 +1,31 @@
+.last-commit p {
+  font-size: 0.7em;
+}
+.commit-msg-input {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.4em;
+  background-color: black;
+  border: 0.7px solid #44d6ff;
+  color: white;
+  transition: all 0.2s ease;
+}
+.commit-msg-input.commit-success {
+  border: solid #12fcd4;
+}
+
+.commit-msg-input.commit-error {
+  border: solid red;
+}
+
+.commit-msg-input:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 768px) {
+  .last-commit p {
+    font-size: 0.5em;
+  }
+}

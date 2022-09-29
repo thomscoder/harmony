@@ -1,0 +1,58 @@
+.add-branches {
+  position: absolute;
+  bottom: 4em;
+  right: 2em;
+  cursor: pointer;
+}
+
+.add-branches svg path {
+  fill: #ffac4b;
+}
+
+.branch-name-input {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.4em;
+  background-color: black;
+  border: 0.7px solid #1e1e1e;
+  color: white;
+}
+
+.branch-name-input:focus {
+  outline: none;
+}
+
+.current-branch-name {
+  position: fixed;
+  top: 3em;
+  left: 15%;
+  width: 70%;
+  color: white;
+  overflow-x: auto;
+  overflow-y: hidden;
+  text-align: center;
+}
+
+span.branch-name {
+  opacity: 0.3;
+  padding: .3em;
+}
+
+span.create-before-proceeding {
+  opacity: .8;
+  color:#ffac4b;
+}
+
+span.active-branch {
+  opacity: .5;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .current-branch-name {
+    left: 25%;
+    width: 50%;
+  }
+}

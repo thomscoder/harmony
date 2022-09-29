@@ -1,34 +1,34 @@
 .add-branches {
-    position: absolute;
-    bottom: 4em;
-    right: 2em;
-    cursor: pointer;
+  position: absolute;
+  bottom: 4em;
+  right: 2em;
+  cursor: pointer;
 }
 
 .add-branches svg path {
-    fill: #ffac4b;
+  fill: #ffac4b;
 }
 
 .branch-name-input {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 0.4em;
-    background-color: black;
-    border: .7px solid #1e1e1e;
-    color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 0.4em;
+  background-color: black;
+  border: 0.7px solid #1e1e1e;
+  color: white;
 }
 
 .branch-name-input:focus {
-    outline: none;
+  outline: none;
 }
 
 .current-branch-name {
-    position: fixed;
-    top: 3em;
-    left: 0;
-    opacity: .3;
-    width: 100%;
-    color: white;
+  position: fixed;
+  top: 3em;
+  left: 0;
+  opacity: 0.3;
+  width: 100%;
+  color: white;
 }

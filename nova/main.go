@@ -7,7 +7,7 @@ import (
 
 func main() {
 	ch := make(chan struct{}, 0)
-	js.Global().Set("initProject", mapping.InitProject())
+	js.Global().Set("createVirtualFiles", mapping.CreateVirtualFiles())
 	js.Global().Set("openVirtualFile", mapping.OpenVirtualFile())
 	js.Global().Set("saveVirtualFile", mapping.SaveVirtualFile())
 	js.Global().Set("virtualCommit", mapping.VirtualCommit())

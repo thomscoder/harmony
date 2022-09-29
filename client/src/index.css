@@ -14,7 +14,8 @@
   -webkit-text-size-adjust: 100%;
 }
 
-html, body {
+html,
+body {
   background-color: #1e1e1e;
 }
 
@@ -72,7 +73,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-      background-color: #1e1e1e;
+    background-color: #1e1e1e;
   }
   a:hover {
     color: #747bff;

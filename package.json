@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "make compile && cd client && pnpm dev",
+    "run:client": "cd client && pnpm dev",
+    "run:server": "node server.js",
+    "compile:nova": "make compile",
+    "dev": "concurrently \"pnpm run:server\" \"pnpm compile:nova && pnpm run:client\"",
     "build": "make compile && cd client && pnpm build",
     "format": "prettier --config ./.prettierrc.js --write --loglevel silent '**/*.{js,ts,tsx,css}'"
   },
@@ -13,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^7.4.0",
     "prettier": "^2.7.1"
   },
   "dependencies": {

@@ -87,7 +87,7 @@ func VirtualCommit() js.Func {
 	})
 }
 
-func InitProject() js.Func {
+func CreateVirtualFiles() js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
 		filename, content := jsonReader([]byte(args[0].String()))
 

@@ -1,11 +1,11 @@
-import {atom} from 'recoil';
+import { atom } from 'recoil';
 
 export const virtualFilesState = atom({
-    key: 'virtualFilesState',
-    default: [],
-})
+  key: 'virtualFilesState',
+  default: [],
+});
 
 export const virtualBranchState = atom({
-    key: 'virtualBranchState',
-    default: '',
-})
+  key: 'virtualBranchState',
+  default: '',
+});

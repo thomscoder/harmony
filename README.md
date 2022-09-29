@@ -13,9 +13,13 @@ Either upload or create one or multiple new files, double click to open and star
 
 <img src="https://i.ibb.co/gy07sQ3/Schermata-2022-09-25-alle-16-40-12.png" width=80% />
 
-# Features
 
-Harmony now supports commits and branches.
+### Harmony now supports commits and branches.
+
+
+
+https://user-images.githubusercontent.com/78874117/193081985-4414305a-9d46-4246-9ef3-297ee09348dd.mov
+
 
 Create branches, 
 create files, 
@@ -27,3 +31,16 @@ switch branches,
 repeat.
 
 Simply refresh the page to restart anew.
+
+#### Run it locally
+Requires `pnpm`, `go`, 
+
+- Install go packages -
+
+```bash
+$ pnpm dev
+```
+This will compile (`make`) and also spin up a reverse proxy
+
+### Important
+> Prepend `http://0.0.0.0:5000` to the repo url in `functions.go` (to not incur in CORS errors)

@@ -1,20 +1,20 @@
 # Harmony
 
-Quickly upload, create, open, read, modify and download files in the browser (no remote server).
+Quickly upload, create, open, read, modify and download files, on the fly, in the browser (no remote server).
 
 <img src="https://i.ibb.co/8gZgk5D/Schermata-2022-09-25-alle-15-10-02.png" width=80% />
 
 > Just me experimenting with WebAssembly.
 <br/>
 
-Harmony implements via WebAssembly a virtual file system in Go (a revisited version of my <a href="https://github.com/thomscoder/nova-git" target="_blank">Nova</a> project) where all the file operations happen. 
+Harmony implements via WebAssembly a virtual file system, written in Go, (a revisited version of my <a href="https://github.com/thomscoder/nova-git" target="_blank">Nova</a> project) where all the file operations happen. 
 
 Either upload or create one or multiple new files, double click to open and start modifying, copy the entire file content in one click.
 
 <img src="https://i.ibb.co/gy07sQ3/Schermata-2022-09-25-alle-16-40-12.png" width=80% />
 
 
-### Harmony now supports commits and branches.
+## Harmony supports git commits and branches.
 
 
 
@@ -33,14 +33,14 @@ repeat.
 Simply refresh the page to restart anew.
 
 #### Run it locally
-Requires `pnpm`, `go`, 
+Requires `pnpm`, `go
 
 - Install go packages -
 
 ```bash
 $ pnpm dev
 ```
-This will compile (`make`) and also spin up a reverse proxy
+This will compile Nova via `make`, and also spin up a reverse proxy
 
 ### Important
-> Prepend `http://0.0.0.0:5000` to the repo url in `functions.go` (to not incur in CORS errors)
+> Prepend `http://0.0.0.0:5000` to the repo url in `nova/virtual/functions.go` (to not incur in CORS errors - in Development)

@@ -1,4 +1,4 @@
-import { CREATE_BRANCH, CREATE_COMMIT, CREATE_FILE, UPLOAD_FILE } from "../../../utils/texts";
+import { CREATE_BRANCH, CREATE_COMMIT, CREATE_FILE, UPLOAD_FILE } from '../../../utils/texts';
 
 export const options = new Map([
   [0, CREATE_FILE],

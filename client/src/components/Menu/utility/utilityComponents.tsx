@@ -4,7 +4,6 @@ import { AiOutlineCloudUpload as UploadFileIcon } from '@react-icons/all-files/a
 import { VscGitCommit as CommitIcon } from '@react-icons/all-files/vsc/VscGitCommit';
 import { AiFillGithub as GithubIcon } from '@react-icons/all-files/ai/AiFillGithub';
 
-
 export const AddFile = () => {
   return (
     <>
@@ -57,7 +56,7 @@ export const Contributors = () => {
           <a href="https://github.com/thomscoder/harmony" target="_blank">
             <GithubIcon />
             <span>by @thomscoder</span>
-            </a>
+          </a>
         </div>
       </div>
     </>

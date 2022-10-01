@@ -2,7 +2,6 @@ import { Fragment, useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
 import { IoMdDocument as DocumentIcon } from '@react-icons/all-files/io/IoMdDocument';
 
-
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { actionState, virtualFilesState } from './atoms/atoms';
 import { openVirtualFilesWrapper, saveVirtualFilesWrapper } from './utils/goFunctions';
@@ -42,11 +41,10 @@ function App() {
   const keyboardShortcut = (e: KeyboardEvent) => {
     if (e.metaKey || e.ctrlKey) {
       if (e.shiftKey) {
-        setAction(keyChecker(e.key)!)
+        setAction(keyChecker(e.key)!);
       }
     }
-  }
-
+  };
 
   useEffect(() => {
     window.addEventListener('keydown', keyboardShortcut);
@@ -58,8 +56,8 @@ function App() {
 
     return () => {
       window.removeEventListener('keydown', keyboardShortcut);
-    }
-  }, [])
+    };
+  }, []);
 
   return (
     <Fragment>

@@ -21,7 +21,9 @@ body {
   background-repeat: no-repeat !important;
 }
 
-button:focus { outline: none !important;}
+button:focus {
+  outline: none !important;
+}
 
 a {
   text-decoration: inherit;

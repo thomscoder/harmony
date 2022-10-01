@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { virtualFilesState, virtualBranchState,  actionState, virtualBranchesState } from '../../atoms/atoms';
+import { virtualFilesState, virtualBranchState, actionState, virtualBranchesState } from '../../atoms/atoms';
 import { getVirtualFilesWrapper, goToBranchWrapper } from '../../utils/goFunctions';
 
 import { AiOutlineClose as CloseIcon } from '@react-icons/all-files/ai/AiOutlineClose';
@@ -17,7 +17,7 @@ const Branches = () => {
 
   useEffect(() => {
     (inputBranchRef.current! as HTMLInputElement).focus();
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (!!branchName) {
@@ -49,7 +49,6 @@ const Branches = () => {
               <CloseIcon onClick={handleCloseClick} />
             </span>
           </div>
-          
         </form>
       </div>
     </>

@@ -47,10 +47,10 @@ li.active-branch {
 }
 
 li.active-branch::after {
-  content: "- active";
-  margin-left: .3em;
+  content: '- active';
+  margin-left: 0.3em;
   color: #fff;
-  opacity: .3;
+  opacity: 0.3;
 }
 
 @media screen and (max-width: 768px) {

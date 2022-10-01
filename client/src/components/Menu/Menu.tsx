@@ -12,10 +12,8 @@ import { DialogContent } from '@mui/material';
 // icons
 import { RiMoonClearFill as MoonIcon } from '@react-icons/all-files/ri/RiMoonClearFill';
 
-
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { actionState, virtualBranchState } from '../../atoms/atoms';
-
 
 import { AddFile, Contributors, CreateBranch, CreateCommit, UploadFile } from './utility/utilityComponents';
 import { CREATE_BRANCH, HELP } from '../../utils/texts';
@@ -36,10 +34,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-
-
 const icons = [<AddFile />, <UploadFile />, <CreateBranch />, <CreateCommit />];
-
 
 const HarmonyMenu = () => {
   const setAction = useSetRecoilState(actionState);
@@ -67,23 +62,27 @@ const HarmonyMenu = () => {
   return (
     <div className="menu-wrapper">
       <div>
-        <Button sx={{
-          color: '#ffac4b',
-        }} aria-describedby={id} onClick={handleClickOpen}>
+        <Button
+          sx={{
+            color: '#ffac4b',
+          }}
+          aria-describedby={id}
+          onClick={handleClickOpen}
+        >
           <MoonIcon size={25} />
         </Button>
         <Dialog open={open} TransitionComponent={Transition} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
           <DialogTitle>{'What do you want to do?'}</DialogTitle>
           {icons.map((icon, index) => {
-            const option = options.get(index)
-            const disabled = !!virtualBranch === false && option !== CREATE_BRANCH && option !== HELP 
+            const option = options.get(index);
+            const disabled = !!virtualBranch === false && option !== CREATE_BRANCH && option !== HELP;
             return (
               <MenuItem disabled={disabled} key={index} className="menu-actions" onClick={(event) => handleMenuItemClick(event, index)}>
                 {icon}
               </MenuItem>
-            )
+            );
           })}
-          <Divider/>
+          <Divider />
           <DialogContent>
             <Contributors />
           </DialogContent>

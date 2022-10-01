@@ -102,7 +102,9 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
   return (
     <Fragment>
       <form onSubmit={textSaver}>
-        <h3>{saved ?  <span className="saved-message">Saved</span> : copied ? <span className="saved-message">Copied</span> : 'Editing'} {filename}</h3>
+        <h3>
+          {saved ? <span className="saved-message">Saved</span> : copied ? <span className="saved-message">Copied</span> : 'Editing'} {filename}
+        </h3>
         <MonacoEditor width="80%" height="40vh" language={fileExt} theme="vs-dark" options={MONACO_OPTIONS} onChange={onChange} editorDidMount={editorDidMount} />
         <div className="editor-btn-container">
           <button

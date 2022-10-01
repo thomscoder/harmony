@@ -19,8 +19,8 @@
 }
 
 .virtual-file-wrapper:hover {
-    background-color: rgba(68, 214, 255, .3);
-    border: .01em solid white;
+  background-color: rgba(68, 214, 255, 0.3);
+  border: 0.01em solid white;
 }
 
 .virtual-file-wrapper svg:hover {

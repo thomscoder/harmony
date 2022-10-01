@@ -38,7 +38,6 @@ const Files = () => {
     (fileCreationInputRef.current! as HTMLInputElement).value = '';
   };
 
-
   useEffect(() => {
     if (action === UPLOAD_FILE) {
       const fileSelector = document.getElementById('file-selector') as HTMLInputElement;

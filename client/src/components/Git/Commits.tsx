@@ -30,9 +30,9 @@ const Commit = () => {
     }
   };
 
-    useEffect(() => {
-      (inputCommitRef.current! as HTMLInputElement).focus();
-    }, [])
+  useEffect(() => {
+    (inputCommitRef.current! as HTMLInputElement).focus();
+  }, []);
 
   useEffect(() => {
     if (commitSuccess) (inputCommitRef.current! as HTMLInputElement).classList.add('commit-success');

@@ -16,14 +16,16 @@
   opacity: 0.5;
 }
 
-.menu-action, .contributors a {
+.menu-action,
+.contributors a {
   width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
-.menu-action span, .contributors span {
+.menu-action span,
+.contributors span {
   margin-left: 0.8em;
 }
 
@@ -32,7 +34,7 @@
   font-weight: normal;
 }
 
-div[aria-describedby="alert-dialog-slide-description"] {
+div[aria-describedby='alert-dialog-slide-description'] {
   background-image: none;
 }
 

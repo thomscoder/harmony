@@ -10,9 +10,6 @@
 }
 
 .branch-name-input {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
   padding: 0.4em;
   background-color: black;
@@ -37,17 +34,23 @@
 
 span.branch-name {
   opacity: 0.3;
-  padding: .3em;
+  padding: 0.3em;
 }
 
 span.create-before-proceeding {
-  opacity: .8;
-  color:#ffac4b;
+  opacity: 0.8;
+  color: #ffac4b;
 }
 
-span.active-branch {
-  opacity: .5;
-  font-weight: bold;
+li.active-branch {
+  color: #ffac4b;
+}
+
+li.active-branch::after {
+  content: "- active";
+  margin-left: .3em;
+  color: #fff;
+  opacity: .3;
 }
 
 @media screen and (max-width: 768px) {

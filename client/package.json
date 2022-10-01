@@ -4,12 +4,16 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 3000",
+    "dev": "vite --port 3000 --host",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
     "@babel/core": ">=7.0.0 <8.0.0",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@fontsource/roboto": "^4.5.8",
+    "@mui/material": "^5.10.7",
     "@react-icons/all-files": "^4.1.0",
     "add": "^2.0.6",
     "core@^7.0.0": "link:babel/core@^7.0.0",
@@ -17,6 +21,7 @@
     "monaco-languageclient": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-draggable": "^4.4.5",
     "react-monaco-editor": "^0.50.1",
     "react-select": "^5.4.0",
     "reactjs-popup": "^2.0.5",

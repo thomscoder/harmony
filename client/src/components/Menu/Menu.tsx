@@ -7,7 +7,6 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import { Divider } from '@mui/material';
-import { DialogContent } from '@mui/material';
 
 // icons
 import { RiMoonClearFill as MoonIcon } from '@react-icons/all-files/ri/RiMoonClearFill';
@@ -15,7 +14,7 @@ import { RiMoonClearFill as MoonIcon } from '@react-icons/all-files/ri/RiMoonCle
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { actionState, virtualBranchState } from '../../atoms/atoms';
 
-import { AddFile, Contributors, CreateBranch, CreateCommit, UploadFile } from './utility/utilityComponents';
+import { AddFile, Contributors, CreateBranch, CreateCommit, FreeMode, UploadFile } from './utility/utilityComponents';
 import { CREATE_BRANCH, HELP } from '../../utils/texts';
 
 import { options } from './utility/menuOptions';
@@ -83,9 +82,12 @@ const HarmonyMenu = () => {
             );
           })}
           <Divider />
-          <DialogContent>
+          <MenuItem>
+            <FreeMode handleClose={handleClose} />
+          </MenuItem>
+          <MenuItem>
             <Contributors />
-          </DialogContent>
+          </MenuItem>
         </Dialog>
       </div>
       <SwitchBranch />

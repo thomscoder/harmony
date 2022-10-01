@@ -130,6 +130,11 @@ input[type='file'] {
   .file-selectors p + div form {
     text-align: center;
   }
+
+  .nova-editor form .editor-btn-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
   .nova-editor form .editor-btn-container button,
   #create-file-btn,
   #downloader {

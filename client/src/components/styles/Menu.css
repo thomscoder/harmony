@@ -30,8 +30,12 @@
 }
 
 .contributors {
-  opacity: 1;
+  opacity: .5;
   font-weight: normal;
+}
+
+.contributors * {
+  color: #ffac4b;
 }
 
 div[aria-describedby='alert-dialog-slide-description'] {

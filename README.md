@@ -8,14 +8,14 @@ Harmony also keep tracks of your changes or "workspaces" through git branches an
 
 > Just me experimenting with WebAssembly.
 
-<img src="https://i.ibb.co/sWkCLrr/Schermata-2022-10-01-alle-13-00-27.png" width=80% />
+<img src="https://i.ibb.co/4JQbLgN/Schermata-2022-10-01-alle-13-58-20.png" width=80% />
 <br/>
 
 Harmony implements via WebAssembly a virtual file system and a in-memory version of Git, written in Go, (a revisited version of my <a href="https://github.com/thomscoder/nova-git" target="_blank">Nova</a> project) where all the file operations happen. 
 
 Save and switch between your "workspaces" in few clicks or even quicker with shortcuts.
 
-<img src="https://i.ibb.co/dJGL6kR/Schermata-2022-10-01-alle-13-00-12.png" width=80% />
+<img src="https://i.ibb.co/hc3gxLk/Schermata-2022-10-01-alle-14-09-06.png" width=80% />
 
 
 ## Harmony supports git commits and branches.

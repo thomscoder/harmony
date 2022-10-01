@@ -1,0 +1,43 @@
+.menu-wrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding: 0.3em;
+  background-color: #121212;
+  z-index: 1;
+}
+
+.time {
+  font-size: 1em;
+  opacity: 0.5;
+}
+
+.menu-action,
+.contributors a {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.menu-action span,
+.contributors span {
+  margin-left: 0.8em;
+}
+
+.contributors {
+  opacity: 1;
+  font-weight: normal;
+}
+
+div[aria-describedby='alert-dialog-slide-description'] {
+  background-image: none;
+}
+
+.tutorial {
+  width: 100%;
+}

@@ -1,69 +1,26 @@
 #root {
   width: 100%;
-  margin: 0 auto;
-  padding: 2rem;
-  height: 80vh;
-}
-
-#github {
-  position: absolute;
-  top: 3em;
-  right: 1em;
-  opacity: 0.1;
+  height: 100vh;
+  overflow: hidden;
 }
 
 #github a {
   color: white;
 }
 
-h1 {
-  text-align: center;
-  color: #ffac4b;
-}
-
-h1 + #guide {
-  padding: 0;
-  position: absolute;
-  top: 3em;
-  right: 3em;
-  opacity: 0.1;
-  background-color: transparent;
-  color: #fff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-h1 + #guide:hover, 
-h1 + #guid:focus {
-  outline: none;
-  border: 0;
-}
-
-.popup-content {
-  margin: auto;
-  background: black;
-  width: 200px;
-  padding: 1em;
-}
-.popup-arrow {
-  color: black;
-}
-
-.file-selectors-wrapper {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-
 .virtual-file-wrapper {
-  padding: 2em;
+  padding: 1em;
+  height: 7.5em;
+  z-index: 0;
 }
 
 .virtual-file-wrapper svg {
   transition: all 0.3s ease;
+}
+
+.virtual-file-wrapper:hover {
+  background-color: rgba(68, 214, 255, 0.3);
+  border: 0.01em solid white;
 }
 
 .virtual-file-wrapper svg:hover {
@@ -71,21 +28,17 @@ h1 + #guid:focus {
 }
 
 .virtual-file-wrapper svg path {
-  stroke: #ffac4b;
+  fill: #fff;
 }
 
 .virtual-file-wrapper.modified svg path {
-  stroke: #d5a5f7;
-}
-
-.App {
-  text-align: center;
+  fill: #f4f4ff;
 }
 
 #create-file-by-name {
-  background-color: #343436;
+  background-color: black;
+  border: none;
   padding: 0.6em;
-  border: 1px solid #ffac4b;
   color: white;
 }
 
@@ -93,27 +46,41 @@ h1 + #guid:focus {
   outline: none;
 }
 
-#create-file-btn {
-  padding: 0.4em 1em;
-}
-
 input[type='file'] {
   display: none;
 }
 
-.custom-file-upload {
-  border: 1px solid #ffac4b;
-  display: inline-block;
-  padding: 6px 12px;
+.text-input-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  background-color: black;
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+.text-input-wrapper .close-btn {
+  padding: 0.2em;
+  opacity: 0.5;
   cursor: pointer;
 }
 
 .files-area {
-  margin-top: 2em;
   display: flex;
-  flex-direction: row;
+  flex-direction: row-reverse;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-end;
+  align-items: flex-end;
+  align-content: flex-end;
+  width: 100%;
+  height: calc(100vh - 3em);
+  margin: 0 auto;
+  overflow-y: auto;
 }
 
 .nova-editor {
@@ -137,10 +104,6 @@ input[type='file'] {
   text-align: initial;
   margin: auto;
   border: 0.3px solid white;
-}
-
-.nova-editor .saved-message {
-  color: white;
 }
 
 .nova-editor form .editor-btn-container button,
@@ -170,6 +133,6 @@ input[type='file'] {
   .nova-editor form .editor-btn-container button,
   #create-file-btn,
   #downloader {
-    padding: 0.4em;
+    padding: 0.3em;
   }
 }

@@ -1,0 +1,21 @@
+.saved-message {
+  background-color: #44d6ff;
+  padding: 0.8em;
+}
+#create-file-by-name,
+.file-selectors-wrapper .custom-file-upload {
+  width: 100%;
+  padding: 0.4em;
+  background-color: black;
+  color: white;
+  transition: all 0.2s ease;
+}
+
+.file-selectors-wrapper input[type='file'] {
+  display: none;
+}
+
+.custom-file-upload {
+  opacity: 0.5;
+  cursor: pointer;
+}

@@ -10,7 +10,17 @@ export const virtualBranchState = atom({
   default: '',
 });
 
+export const virtualBranchesState = atom({
+  key: 'virtualBranchesState',
+  default: [],
+});
+
 export const createVirtualBranchMessageState = atom({
   key: 'createVirtualBranchMessageState',
-  default: ''
-})
+  default: '',
+});
+
+export const actionState = atom({
+  key: 'actionState',
+  default: '',
+});

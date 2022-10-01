@@ -1,23 +1,27 @@
 import { Fragment, useEffect, useState } from 'react';
-import { openVirtualFilesWrapper, saveVirtualFilesWrapper } from '../utils/goFunctions';
-import { Editor } from './components/Editor';
-import { GrDocumentText as DocumentIcon } from '@react-icons/all-files/gr/GrDocumentText';
-import Repository from './components/Repository';
+import Draggable from 'react-draggable';
+import { IoMdDocument as DocumentIcon } from '@react-icons/all-files/io/IoMdDocument';
 
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { actionState, virtualFilesState } from './atoms/atoms';
+import { openVirtualFilesWrapper, saveVirtualFilesWrapper } from './utils/goFunctions';
+import Actions from './components/Actions/Actions';
 
-import { virtualFilesState } from './atoms/atoms';
-import Files from './components/Files';
-import HomepageMisc from './components/HomepageMisc';
+import Files from './components/Files/Files';
+import { Editor } from './components/Editor/Editor';
+import HarmonyMenu from './components/Menu/Menu';
+import { HELP } from './utils/texts';
+import { keyChecker } from './utils/utilityFunctions';
 
+// css
 import './App.css';
 
 function App() {
   const virtualFiles = useRecoilValue(virtualFilesState);
+  const setAction = useSetRecoilState(actionState);
 
   const [editorContent, setEditorContent] = useState<string>('');
   const [openFile, setOpenFile] = useState<string>('');
-  const [disableAll, setDisableAll] = useState<boolean>(false);
   const [prevOpenedFiles, setPrevOpenedFiles] = useState<Array<string>>([]);
 
   const clickOnFileHandler = (virtualFile: never) => {
@@ -34,32 +38,44 @@ function App() {
     setOpenFile('');
   };
 
-  useEffect(() => {
-    const layer = document.querySelector('#layer') as HTMLDivElement;
-    if (!!openFile) {
-      layer.classList.add('editor-open');
-      setDisableAll(true);
-    } else {
-      layer.classList.remove('editor-open');
-      setDisableAll(false);
+  const keyboardShortcut = (e: KeyboardEvent) => {
+    if (e.metaKey || e.ctrlKey) {
+      if (e.shiftKey) {
+        setAction(keyChecker(e.key)!);
+      }
     }
-  }, [openFile]);
+  };
+
+  useEffect(() => {
+    window.addEventListener('keydown', keyboardShortcut);
+
+    if (!localStorage.getItem('harmony-tutorial')) {
+      setAction(HELP);
+      localStorage.setItem('harmony-tutorial', 'true');
+    }
+
+    return () => {
+      window.removeEventListener('keydown', keyboardShortcut);
+    };
+  }, []);
 
   return (
     <Fragment>
-      <HomepageMisc />
-      <Repository />
-      <Files disableAll={disableAll} />
+      <HarmonyMenu />
+      <Actions />
+      <Files />
       <div className="App">
         <div className="files-area">
           {virtualFiles.map((virtualFile, index) => {
             return (
-              <div key={index} className={`virtual-file-wrapper ${!!prevOpenedFiles.find((f) => f === virtualFile) ? 'modified' : ''}`}>
-                <DocumentIcon size={60} onClick={() => clickOnFileHandler(virtualFile)} />
-                <div key={index} className="file">
-                  {virtualFile}
+              <Draggable key={index} bounds="parent">
+                <div className={`virtual-file-wrapper ${!!prevOpenedFiles.find((f) => f === virtualFile) ? 'modified' : ''}`}>
+                  <DocumentIcon size={60} onDoubleClick={() => clickOnFileHandler(virtualFile)} />
+                  <div key={index} className="file">
+                    {virtualFile}
+                  </div>
                 </div>
-              </div>
+              </Draggable>
             );
           })}
         </div>

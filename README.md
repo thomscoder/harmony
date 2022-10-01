@@ -1,24 +1,29 @@
 # Harmony
 
-Quickly upload, create, open, read, modify and download files, on the fly, in the browser (no remote server).
+Quickly upload, create, open, read, modify and download files, on the fly.
 
-<img src="https://i.ibb.co/8gZgk5D/Schermata-2022-09-25-alle-15-10-02.png" width=80% />
+Harmony also keep tracks of your changes or "workspaces" through git branches and git commits, all in-memory in your browser.
+
+<img src="https://i.ibb.co/mb99Q01/Schermata-2022-10-01-alle-13-00-39.png" width=80% />
 
 > Just me experimenting with WebAssembly.
+
+<img src="https://i.ibb.co/4JQbLgN/Schermata-2022-10-01-alle-13-58-20.png" width=80% />
 <br/>
 
-Harmony implements via WebAssembly a virtual file system, written in Go, (a revisited version of my <a href="https://github.com/thomscoder/nova-git" target="_blank">Nova</a> project) where all the file operations happen. 
+Harmony implements via WebAssembly a virtual file system and a in-memory version of Git, written in Go, (a revisited version of my <a href="https://github.com/thomscoder/nova-git" target="_blank">Nova</a> project) where all the file operations happen. 
 
-Either upload or create one or multiple new files, double click to open and start modifying, copy the entire file content in one click.
+Save and switch between your "workspaces" in few clicks or even quicker with shortcuts.
 
-<img src="https://i.ibb.co/gy07sQ3/Schermata-2022-09-25-alle-16-40-12.png" width=80% />
+<img src="https://i.ibb.co/hc3gxLk/Schermata-2022-10-01-alle-14-09-06.png" width=80% />
 
 
 ## Harmony supports git commits and branches.
 
 
 
-https://user-images.githubusercontent.com/78874117/193081985-4414305a-9d46-4246-9ef3-297ee09348dd.mov
+https://user-images.githubusercontent.com/78874117/193406968-cf0b44c6-c5a9-4e14-9085-edbea06bf59e.mp4
+
 
 
 Create branches, 

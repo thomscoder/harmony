@@ -1,16 +1,18 @@
 .last-commit p {
   font-size: 0.7em;
 }
+
+.text-input-wrapper .close-btn svg {
+  vertical-align: middle;
+}
+
 .commit-msg-input {
-  position: fixed;
-  bottom: 0;
-  left: 0;
+  background-color: black;
   width: 100%;
   padding: 0.4em;
-  background-color: black;
-  border: 0.7px solid #44d6ff;
   color: white;
   transition: all 0.2s ease;
+  border: none;
 }
 .commit-msg-input.commit-success {
   border: solid #12fcd4;

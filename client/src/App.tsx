@@ -1,9 +1,10 @@
 import { Fragment, useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
+
 import { IoMdDocument as DocumentIcon } from '@react-icons/all-files/io/IoMdDocument';
 
 import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { actionState, virtualFilesState } from './atoms/atoms';
+import { actionState, freeModeDisabledState, virtualFilesState } from './atoms/atoms';
 import { openVirtualFilesWrapper, saveVirtualFilesWrapper } from './utils/goFunctions';
 import Actions from './components/Actions/Actions';
 
@@ -19,6 +20,8 @@ import './App.css';
 function App() {
   const virtualFiles = useRecoilValue(virtualFilesState);
   const setAction = useSetRecoilState(actionState);
+  const freeModeDisabled = useRecoilValue(freeModeDisabledState);
+
 
   const [editorContent, setEditorContent] = useState<string>('');
   const [openFile, setOpenFile] = useState<string>('');
@@ -68,9 +71,11 @@ function App() {
         <div className="files-area">
           {virtualFiles.map((virtualFile, index) => {
             return (
-              <Draggable key={index} bounds="parent">
+              <Draggable key={index} bounds="parent" disabled={freeModeDisabled}>
                 <div className={`virtual-file-wrapper ${!!prevOpenedFiles.find((f) => f === virtualFile) ? 'modified' : ''}`}>
-                  <DocumentIcon size={60} onDoubleClick={() => clickOnFileHandler(virtualFile)} />
+                  <DocumentIcon size={60}  onDoubleClick={() => {
+                   clickOnFileHandler(virtualFile)
+                  }} />
                   <div key={index} className="file">
                     {virtualFile}
                   </div>

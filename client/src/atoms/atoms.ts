@@ -24,3 +24,8 @@ export const actionState = atom({
   key: 'actionState',
   default: '',
 });
+
+export const freeModeDisabledState = atom({
+  key: 'freeModeDisabledState',
+  default: false,
+})

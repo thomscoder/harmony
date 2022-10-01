@@ -5,7 +5,6 @@ import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-import { Divider } from '@mui/material';
 
 import { BiHelpCircle as HelpIcon } from '@react-icons/all-files/bi/BiHelpCircle';
 
@@ -67,6 +66,12 @@ const Help = () => {
               It is up to you when (and if) to commit (locally - in-memory for now) the changes. By committing you can freely switch between branches without losing what you have done.
               <br />
               Refresh the page to restart anew.
+              <br/>
+              <br/>
+              Double click on file to open the editor.<br/>
+              (Lock and unlock file drag - on mobile lock the drag to edit the content of a file)
+              <br/>
+              <br/>
               <strong>Shortcuts</strong>
               <br />- <strong>Ctrl + Shift + B</strong> : Create a branch (or switching to one)
               <br />- <strong>Ctrl + Shift + C</strong> : Create a new commit

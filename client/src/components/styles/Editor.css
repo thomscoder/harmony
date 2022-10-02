@@ -26,10 +26,13 @@
   text-align: center;
   background-color: #121212;
   cursor: grab;
-  display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 0 2em;
+}
+
+.nova-editor form .editor-btn-container {
+  display: flex;
+  width: 100%;
 }
 
 .nova-editor form .editor-btn-container button,
@@ -39,6 +42,7 @@
   color: white;
   border: 0.3px solid white;
   border-radius: 0;
+  width: 100%;
 }
 
 .nova-editor form .editor-btn-container button:hover,
@@ -54,6 +58,7 @@
 #downloader {
   padding: 0.53em 1em;
   background-color: #ffac4b;
+  text-align: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -68,13 +73,8 @@
     font-size: 13px;
   }
 
-  .nova-editor form .editor-btn-container {
-    display: flex;
-    width: 100%;
-  }
   .nova-editor form .editor-btn-container button,
   #downloader {
     padding: 0.3em;
-    width: 100%;
   }
 }

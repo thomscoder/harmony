@@ -1,5 +1,6 @@
 import { Fragment, useState } from 'react';
 import Draggable from 'react-draggable';
+import { isMobile, isDesktop } from 'react-device-detect';
 
 import MonacoEditor, { EditorDidMount } from 'react-monaco-editor';
 import * as monaco from 'monaco-editor';
@@ -118,7 +119,6 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
             <span>
               {saved ? <span className="saved-message">Saved</span> : copied ? <span className="saved-message">Copied</span> : 'Editing'} {filename}
             </span>
-            <CloseIcon onClick={() => close()} />
           </strong>
           <MonacoEditor width="80%" height="40vh" language={fileExt} theme="vs-dark" options={MONACO_OPTIONS} onChange={onChange} editorDidMount={editorDidMount} />
           <div className="editor-btn-container">
@@ -166,6 +166,15 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
                 <DownloadIcon />
               </button>
             )}
+            <button
+              type="button"
+              id="clear-icon"
+              onClick={() => {
+                close();
+              }}
+            >
+              <CloseIcon />
+            </button>
           </div>
         </form>
       </Draggable>

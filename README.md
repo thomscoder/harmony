@@ -4,25 +4,23 @@ Quickly upload, create, open, read, modify and download files, on the fly.
 
 Harmony also keep tracks of your changes or "workspaces" through git branches and git commits, all in-memory in your browser.
 
-<img src="https://i.ibb.co/mb99Q01/Schermata-2022-10-01-alle-13-00-39.png" width=80% />
+<img src="https://i.ibb.co/GC4SfB2/Schermata-2022-10-02-alle-18-13-31.png" width=80% />
 
 > Just me experimenting with WebAssembly.
-
-<img src="https://i.ibb.co/4JQbLgN/Schermata-2022-10-01-alle-13-58-20.png" width=80% />
 <br/>
 
 Harmony implements via WebAssembly a virtual file system and a in-memory version of Git, written in Go, (a revisited version of my <a href="https://github.com/thomscoder/nova-git" target="_blank">Nova</a> project) where all the file operations happen. 
 
 Save and switch between your "workspaces" in few clicks or even quicker with shortcuts.
 
-<img src="https://i.ibb.co/hc3gxLk/Schermata-2022-10-01-alle-14-09-06.png" width=80% />
+<img src="https://i.ibb.co/1zXsCVk/Schermata-2022-10-02-alle-18-13-54.png" width=80% />
 
 
 ## Harmony supports git commits and branches.
 
 
 
-https://user-images.githubusercontent.com/78874117/193406968-cf0b44c6-c5a9-4e14-9085-edbea06bf59e.mp4
+https://user-images.githubusercontent.com/78874117/193465430-7a76e848-1e5b-406a-b2b0-99869a031f3a.mp4
 
 
 

@@ -3,8 +3,8 @@ import { AiOutlineBranches as BranchIcon } from '@react-icons/all-files/ai/AiOut
 import { AiOutlineCloudUpload as UploadFileIcon } from '@react-icons/all-files/ai/AiOutlineCloudUpload';
 import { VscGitCommit as CommitIcon } from '@react-icons/all-files/vsc/VscGitCommit';
 import { AiFillGithub as GithubIcon } from '@react-icons/all-files/ai/AiFillGithub';
-import {BsUnlock as UnlockedIcon} from '@react-icons/all-files/bs/BsUnlock';
-import {BsLock as LockedIcon} from '@react-icons/all-files/bs/BsLock';
+import { BsUnlock as UnlockedIcon } from '@react-icons/all-files/bs/BsUnlock';
+import { BsLock as LockedIcon } from '@react-icons/all-files/bs/BsLock';
 import { useRecoilState } from 'recoil';
 import { freeModeDisabledState } from '../../../atoms/atoms';
 
@@ -67,30 +67,34 @@ export const Contributors = () => {
   );
 };
 
-export const FreeMode = ({handleClose}: {handleClose: () => void}) => {
+export const FreeMode = ({ handleClose }: { handleClose: () => void }) => {
   const [freeModeDisabled, setFreeModeDisabled] = useRecoilState(freeModeDisabledState);
   return (
     <>
       <div className="menu-action">
-        {
-          !freeModeDisabled && <div onClick={() => {
-              setFreeModeDisabled(true)
-              handleClose()
-            }}>
-            <UnlockedIcon size={20}/>
-              <span>Lock file drag</span>
-          </div>
-        }
-        {
-          freeModeDisabled && <div onClick={() => {
-              setFreeModeDisabled(false)
+        {!freeModeDisabled && (
+          <div
+            onClick={() => {
+              setFreeModeDisabled(true);
               handleClose();
-            }}>
-            <LockedIcon size={20}  />
-              <span>Unlock file drag</span>
+            }}
+          >
+            <LockedIcon size={20} />
+            <span>Lock file drag</span>
           </div>
-        }
+        )}
+        {freeModeDisabled && (
+          <div
+            onClick={() => {
+              setFreeModeDisabled(false);
+              handleClose();
+            }}
+          >
+            <UnlockedIcon size={20} />
+            <span>Unlock file drag</span>
+          </div>
+        )}
       </div>
     </>
-  )
-}
+  );
+};

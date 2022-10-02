@@ -1,15 +1,15 @@
-import { forwardRef, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import { TransitionProps } from '@mui/material/transitions';
-import { Divider } from '@mui/material';
+import { Divider, styled } from '@mui/material';
+import Tooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip';
 
 // icons
-import { RiMoonClearFill as MoonIcon } from '@react-icons/all-files/ri/RiMoonClearFill';
+import { RiLayoutGridFill as MenuIcon } from '@react-icons/all-files/ri/RiLayoutGridFill';
 
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { actionState, virtualBranchState } from '../../atoms/atoms';
@@ -35,11 +35,21 @@ const Transition = forwardRef(function Transition(
 
 const icons = [<AddFile />, <UploadFile />, <CreateBranch />, <CreateCommit />];
 
+const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => <Tooltip {...props} arrow classes={{ popper: className }} />)(({ theme }) => ({
+  [`& .${tooltipClasses.arrow}`]: {
+    color: theme.palette.common.black,
+  },
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: theme.palette.common.black,
+  },
+}));
+
 const HarmonyMenu = () => {
   const setAction = useSetRecoilState(actionState);
   const virtualBranch = useRecoilValue(virtualBranchState);
 
   const [open, setOpen] = useState(false);
+  const [openTooltip, setOpenTooltip] = useState(true);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -56,22 +66,35 @@ const HarmonyMenu = () => {
     }
   };
 
+  const handleTooltip = () => {
+    setOpenTooltip(false);
+  };
+
+  useEffect(() => {
+    const timeout = setTimeout(handleTooltip, 3000);
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
+
   const id = open ? 'simple-popover' : undefined;
 
   return (
     <div className="menu-wrapper">
       <div>
-        <Button
-          sx={{
-            color: '#ffac4b',
-          }}
-          aria-describedby={id}
-          onClick={handleClickOpen}
-        >
-          <MoonIcon size={25} />
-        </Button>
+        <BootstrapTooltip open={openTooltip} title="menu">
+          <Button
+            sx={{
+              color: '#ffac4b',
+            }}
+            aria-describedby={id}
+            onClick={handleClickOpen}
+          >
+            <MenuIcon size={25} />
+          </Button>
+        </BootstrapTooltip>
         <Dialog open={open} TransitionComponent={Transition} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
-          <DialogTitle>{'What do you want to do?'}</DialogTitle>
+          {/* <DialogTitle>{'What do you want to do?'}</DialogTitle> */}
           {icons.map((icon, index) => {
             const option = options.get(index);
             const disabled = !!virtualBranch === false && option !== CREATE_BRANCH && option !== HELP;

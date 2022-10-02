@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
+import { isMobile } from 'react-device-detect';
 
 import { IoMdDocument as DocumentIcon } from '@react-icons/all-files/io/IoMdDocument';
 
@@ -21,7 +22,6 @@ function App() {
   const virtualFiles = useRecoilValue(virtualFilesState);
   const setAction = useSetRecoilState(actionState);
   const freeModeDisabled = useRecoilValue(freeModeDisabledState);
-
 
   const [editorContent, setEditorContent] = useState<string>('');
   const [openFile, setOpenFile] = useState<string>('');
@@ -68,14 +68,17 @@ function App() {
       <Actions />
       <Files />
       <div className="App">
-        <div className="files-area">
+        <div className="files-area" style={filesAreaStyle}>
           {virtualFiles.map((virtualFile, index) => {
             return (
               <Draggable key={index} bounds="parent" disabled={freeModeDisabled}>
-                <div className={`virtual-file-wrapper ${!!prevOpenedFiles.find((f) => f === virtualFile) ? 'modified' : ''}`}>
-                  <DocumentIcon size={60}  onDoubleClick={() => {
-                   clickOnFileHandler(virtualFile)
-                  }} />
+                <div
+                  onDoubleClick={() => {
+                    clickOnFileHandler(virtualFile);
+                  }}
+                  className={`virtual-file-wrapper ${!!prevOpenedFiles.find((f) => f === virtualFile) ? 'modified' : ''}`}
+                >
+                  <DocumentIcon size={60} />
                   <div key={index} className="file">
                     {virtualFile}
                   </div>
@@ -93,5 +96,10 @@ function App() {
     </Fragment>
   );
 }
+
+const filesAreaStyle = {
+  alignContent: isMobile ? 'flex-start' : 'center',
+  justifyContent: isMobile ? 'flex-end' : 'center',
+};
 
 export default App;

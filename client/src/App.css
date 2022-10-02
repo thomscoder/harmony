@@ -74,70 +74,15 @@ input[type='file'] {
   display: flex;
   flex-direction: row-reverse;
   flex-wrap: wrap;
-  justify-content: flex-end;
   align-items: flex-end;
-  align-content: flex-end;
   width: 100%;
   height: calc(100vh - 3em);
   margin: 0 auto;
   overflow-y: auto;
 }
 
-.nova-editor {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-}
-
-.nova-editor form {
-  margin: auto;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.nova-editor form .react-monaco-editor-container {
-  width: 100% !important;
-  text-align: initial;
-  margin: auto;
-  border: 0.3px solid white;
-}
-
-.nova-editor form .editor-btn-container button,
-#create-file-btn,
-#downloader {
-  background-color: #1e1e1e;
-  color: white;
-  border: 0.3px solid white;
-  border-radius: 0;
-}
-
-.nova-editor form .editor-btn-container button:hover,
-#create-file-btn,
-#downloader:hover {
-  background-color: #44d6ff;
-}
-
-#downloader {
-  padding: 0.53em 1em;
-  background-color: #ffac4b;
-}
-
 @media screen and (max-width: 768px) {
   .file-selectors p + div form {
     text-align: center;
-  }
-
-  .nova-editor form .editor-btn-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  .nova-editor form .editor-btn-container button,
-  #create-file-btn,
-  #downloader {
-    padding: 0.3em;
   }
 }

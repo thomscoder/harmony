@@ -1,3 +1,6 @@
+import { Fragment, useState } from 'react';
+import Draggable from 'react-draggable';
+
 import MonacoEditor, { EditorDidMount } from 'react-monaco-editor';
 import * as monaco from 'monaco-editor';
 import { MonacoServices } from 'monaco-languageclient';
@@ -7,7 +10,15 @@ import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
 import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
 import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
 import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
-import { Fragment, useState } from 'react';
+
+import { RiDownloadCloud2Line as DownloadIcon } from '@react-icons/all-files/ri/RiDownloadCloud2Line';
+import { RiDownloadCloud2Fill as DownloadIconFill } from '@react-icons/all-files/ri/RiDownloadCloud2Fill';
+import { AiOutlineSave as SaveIcon } from '@react-icons/all-files/ai/AiOutlineSave';
+import { AiOutlineCopy as CopyIcon } from '@react-icons/all-files/ai/AiOutlineCopy';
+import { AiOutlineClose as CloseIcon } from '@react-icons/all-files/ai/AiOutlineClose';
+import { GrClear as ClearIcon } from '@react-icons/all-files/gr/GrClear';
+
+import '../styles/Editor.css';
 
 self.MonacoEnvironment = {
   getWorker(_, label) {
@@ -101,60 +112,63 @@ export function Editor({ text, save, close, filename }: { text: string; save: an
 
   return (
     <Fragment>
-      <form onSubmit={textSaver}>
-        <h3>
-          {saved ? <span className="saved-message">Saved</span> : copied ? <span className="saved-message">Copied</span> : 'Editing'} {filename}
-        </h3>
-        <MonacoEditor width="80%" height="40vh" language={fileExt} theme="vs-dark" options={MONACO_OPTIONS} onChange={onChange} editorDidMount={editorDidMount} />
-        <div className="editor-btn-container">
-          <button
-            type="button"
-            className="editor-btn copy-btn"
-            onClick={() => {
-              navigator.clipboard.writeText(writtenText).then(() => {
-                setCopied(true);
-              });
-            }}
-          >
-            Copy Text
-          </button>
-          <button type="submit" className="editor-btn save-btn">
-            Save
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              const editorModel = monaco.editor.getModel(editorUri as monaco.Uri);
-              editorModel?.setValue('');
-            }}
-          >
-            Clear
-          </button>
-          <a
-            href=""
-            id="downloader"
-            style={{
-              display: !downloader ? 'none' : 'inline-block',
-            }}
-          >
-            Download
-          </a>
-          {!downloader && (
+      <Draggable bounds="parent" handle="strong">
+        <form onSubmit={textSaver}>
+          <strong className="editor-file-name">
+            <span>
+              {saved ? <span className="saved-message">Saved</span> : copied ? <span className="saved-message">Copied</span> : 'Editing'} {filename}
+            </span>
+            <CloseIcon onClick={() => close()} />
+          </strong>
+          <MonacoEditor width="80%" height="40vh" language={fileExt} theme="vs-dark" options={MONACO_OPTIONS} onChange={onChange} editorDidMount={editorDidMount} />
+          <div className="editor-btn-container">
             <button
               type="button"
+              className="editor-btn copy-btn"
               onClick={() => {
-                download(writtenText, filename, 'text/plain');
-                setDownloader(true);
+                navigator.clipboard.writeText(writtenText).then(() => {
+                  setCopied(true);
+                });
               }}
             >
-              Prepare download
+              <CopyIcon />
             </button>
-          )}
-          <button type="button" className="editor-btn close-btn" onClick={() => close()}>
-            Close
-          </button>
-        </div>
-      </form>
+            <button type="submit" className="editor-btn save-btn">
+              <SaveIcon />
+            </button>
+            <button
+              type="button"
+              id="clear-icon"
+              onClick={() => {
+                const editorModel = monaco.editor.getModel(editorUri as monaco.Uri);
+                editorModel?.setValue('');
+              }}
+            >
+              <ClearIcon />
+            </button>
+            <a
+              href=""
+              id="downloader"
+              style={{
+                display: !downloader ? 'none' : 'inline-block',
+              }}
+            >
+              <DownloadIconFill />
+            </a>
+            {!downloader && (
+              <button
+                type="button"
+                onClick={() => {
+                  download(writtenText, filename, 'text/plain');
+                  setDownloader(true);
+                }}
+              >
+                <DownloadIcon />
+              </button>
+            )}
+          </div>
+        </form>
+      </Draggable>
     </Fragment>
   );
 }

@@ -80,7 +80,7 @@ const Help = () => {
               <br />- <strong>Ctrl + Shift + U </strong>: Upload a new file
               <br />- <strong>Ctrl + Shift + H</strong> : Open this guide
               <br />
-              <video width="100%" src="https://user-images.githubusercontent.com/78874117/193406968-cf0b44c6-c5a9-4e14-9085-edbea06bf59e.mp4" controls autoPlay></video>
+              <video width="100%" src="https://user-images.githubusercontent.com/78874117/193465430-7a76e848-1e5b-406a-b2b0-99869a031f3a.mp4" controls autoPlay></video>
               {(action === HELP || open) && (
                 <Button
                   sx={{

@@ -29,3 +29,8 @@ export const freeModeDisabledState = atom({
   key: 'freeModeDisabledState',
   default: false,
 });
+
+export const gitFootPrintState = atom({
+  key: 'gitFootPrintState',
+  default: [] as any,
+})

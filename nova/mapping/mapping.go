@@ -18,8 +18,6 @@ var store, storer = novaStore.CreateStore()
 
 var repository, err = git.Open(storer, store)
 
-var commitsHistory = make(map[string]string)
-
 type Files struct {
 	Files []File `json:"files"`
 }
@@ -75,6 +73,7 @@ func VirtualCommit() js.Func {
 		if status.String() == "" {
 			return ""
 		}
+		commit := make(map[string]string)
 
 		commitMsg := args[0].String()
 
@@ -84,8 +83,10 @@ func VirtualCommit() js.Func {
 		}
 		hash := novaStore.Screenshot(store, wt, commitMsg)
 		if hash != "" {
-			commitsHistory[commitMsg] = hash
-			commitsToJson, _ := json.Marshal(commitsHistory)
+			commit["hash"] = hash
+			commit["message"] = commitMsg
+			commitsToJson, _ := json.Marshal(commit)
+			fmt.Println(commit)
 			return string(commitsToJson)
 		}
 		return "err"

@@ -5,6 +5,8 @@ import { VscGitCommit as CommitIcon } from '@react-icons/all-files/vsc/VscGitCom
 import { AiFillGithub as GithubIcon } from '@react-icons/all-files/ai/AiFillGithub';
 import { BsUnlock as UnlockedIcon } from '@react-icons/all-files/bs/BsUnlock';
 import { BsLock as LockedIcon } from '@react-icons/all-files/bs/BsLock';
+import {BiGitPullRequest as GraphIcon} from '@react-icons/all-files/bi/BiGitPullRequest';
+
 import { useRecoilState } from 'recoil';
 import { freeModeDisabledState } from '../../../atoms/atoms';
 
@@ -47,6 +49,17 @@ export const UploadFile = () => {
       <div className="menu-action upload-file">
         <UploadFileIcon />
         <span>Upload a file</span>
+      </div>
+    </>
+  );
+};
+
+export const GraphMode = () => {
+  return (
+    <>
+      <div className="menu-action graph-mode">
+        <GraphIcon />
+        <span>Graph mode</span>
       </div>
     </>
   );

@@ -5,6 +5,7 @@ specifiers:
   '@emotion/react': ^11.10.4
   '@emotion/styled': ^11.10.4
   '@fontsource/roboto': ^4.5.8
+  '@gitgraph/js': ^1.4.0
   '@mui/material': ^5.10.7
   '@react-icons/all-files': ^4.1.0
   '@types/react': ^18.0.17
@@ -32,6 +33,7 @@ dependencies:
   '@emotion/react': 11.10.4_axxkdcpdr7up57umjkldobkynm
   '@emotion/styled': 11.10.4_sn4wuyy54zwps25tv4w7lbiz6i
   '@fontsource/roboto': 4.5.8
+  '@gitgraph/js': 1.4.0
   '@mui/material': 5.10.7_af5ln35zuaotaffazii6n6bke4
   '@react-icons/all-files': 4.1.0_react@18.2.0
   add: 2.0.6
@@ -469,6 +471,16 @@ packages:
 
   /@fontsource/roboto/4.5.8:
     resolution: {integrity: sha512-CnD7zLItIzt86q4Sj3kZUiLcBk1dSk81qcqgMGaZe7SQ1P8hFNxhMl5AZthK1zrDM5m74VVhaOpuMGIL4gagaA==}
+    dev: false
+
+  /@gitgraph/core/1.5.0:
+    resolution: {integrity: sha512-8CeeHbkKoFHM1y9vfjYiHyEpzl1mEhVrg5c/eFgDBsntOYswoDKU2yOf6DjtVINcE60wmcuynBSJqjMkQo07Ww==}
+    dev: false
+
+  /@gitgraph/js/1.4.0:
+    resolution: {integrity: sha512-7wxTTCFnRVjsqj+Zt09+3F79WhH4MK46ZS20AwbcB/MJFshSMeMH4nYmNDPa9McVsiL+cFsvW1pmZoquAOoHMw==}
+    dependencies:
+      '@gitgraph/core': 1.5.0
     dev: false
 
   /@jridgewell/gen-mapping/0.1.1:

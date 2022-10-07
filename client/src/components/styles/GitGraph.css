@@ -1,0 +1,5 @@
+#root .menu-wrapper + #graph {
+    background-color: #1e1e1e;
+    width: 60% !important;
+    overflow: auto;
+}

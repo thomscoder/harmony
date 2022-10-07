@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
-import { virtualFilesState, virtualBranchState, actionState, virtualBranchesState } from '../../atoms/atoms';
+import { virtualFilesState, virtualBranchState, actionState, virtualBranchesState, gitFootPrintState } from '../../atoms/atoms';
 import { getVirtualFilesWrapper, goToBranchWrapper } from '../../utils/goFunctions';
+
+import type { gitFootPrintType } from "../../types/types"
 
 import { AiOutlineClose as CloseIcon } from '@react-icons/all-files/ai/AiOutlineClose';
 import '../styles/Branches.css';
@@ -10,6 +12,7 @@ const Branches = () => {
   const setVirtualFiles = useSetRecoilState(virtualFilesState);
   const [virtualBranch, setVirtualBranch] = useRecoilState(virtualBranchState);
   const setAction = useSetRecoilState(actionState);
+  const setGitFootprint = useSetRecoilState(gitFootPrintState);
 
   const [branches, setBranches] = useRecoilState(virtualBranchesState);
   const [branchName, setBranchName] = useState<string>('');
@@ -24,6 +27,11 @@ const Branches = () => {
       // Gets files stored in the current worktree
       setVirtualFiles(getVirtualFilesWrapper());
       setVirtualBranch(branchName);
+      // Record action
+      setGitFootprint((prev: gitFootPrintType[]) => [...prev, {
+        branch: branchName,
+        commit: {},
+      }])
       setAction('');
     }
   }, [branches]);

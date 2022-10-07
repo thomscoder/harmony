@@ -14,7 +14,7 @@ import { RiLayoutGridFill as MenuIcon } from '@react-icons/all-files/ri/RiLayout
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { actionState, virtualBranchState } from '../../atoms/atoms';
 
-import { AddFile, Contributors, CreateBranch, CreateCommit, FreeMode, UploadFile } from './utility/utilityComponents';
+import { AddFile, Contributors, CreateBranch, CreateCommit, FreeMode, GraphMode, UploadFile } from './utility/utilityComponents';
 import { CREATE_BRANCH, HELP } from '../../utils/texts';
 
 import { options } from './utility/menuOptions';
@@ -33,7 +33,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const icons = [<AddFile />, <UploadFile />, <CreateBranch />, <CreateCommit />];
+const icons = [<AddFile />, <UploadFile />, <CreateBranch />, <CreateCommit />, <GraphMode />];
 
 const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => <Tooltip {...props} arrow classes={{ popper: className }} />)(({ theme }) => ({
   [`& .${tooltipClasses.arrow}`]: {

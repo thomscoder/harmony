@@ -63,7 +63,7 @@ const Files = () => {
 
   useEffect(() => {
     if (file && fileContent) {
-      const created = createVirtualFilesWrapper(file.name, fileContent as string|undefined);
+      const created = createVirtualFilesWrapper(file.name, fileContent as string | undefined);
       if (created) {
         setVirtualFiles(created.split(' '));
         const fileSelector = document.getElementById('file-selector') as HTMLInputElement;

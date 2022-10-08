@@ -47,10 +47,10 @@ const GitGraph = () => {
       author: 'Nova Harmony <nova@harmony.com>',
     });
 
-    gitFootPrints.forEach((footPrint: gitFootPrintType) => {
+    gitFootPrints.forEach((footPrint: gitFootPrintType, index: number) => {
       gitgraph.branch(footPrint.branch).commit({
         hash: footPrint.commit?.hash ?? '',
-        subject: footPrint.commit?.message ?? 'Checkout',
+        subject: footPrint.commit?.message ?? index === 0 ? '' : `Checkout to ${footPrint.branch}`,
         onClick: () => clickOnCommitHandler(footPrint.commit.hash),
         onMessageClick: () => clickOnCommitHandler(footPrint.commit.hash),
         style: {

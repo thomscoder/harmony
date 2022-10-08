@@ -81,6 +81,10 @@ const Help = () => {
               <br />- <strong>Ctrl + Shift + H</strong> : Open this guide
               <br />
               <video width="100%" src="https://user-images.githubusercontent.com/78874117/193465430-7a76e848-1e5b-406a-b2b0-99869a031f3a.mp4" controls autoPlay></video>
+              <br />
+              <br />
+              Harmony keeps track of the branches and commits you create allowing you to go back to a specific commit.
+              <video width="100%" src="https://user-images.githubusercontent.com/78874117/194714002-f6ec20c5-c7cc-4144-85e1-0bdb65097b7d.mov" controls autoPlay></video>
               {(action === HELP || open) && (
                 <Button
                   sx={{

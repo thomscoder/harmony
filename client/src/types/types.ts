@@ -8,4 +8,4 @@ export type gitFootPrintType = {
   commit: harmonyCommit;
 };
 
-export type EditorProps = { text: string; save: any; close: any; filename: string }
+export type EditorProps = { text: string; save: any; close: any; filename: string };

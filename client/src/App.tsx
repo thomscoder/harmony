@@ -55,7 +55,7 @@ function App() {
 
   useEffect(() => {
     window.addEventListener('keydown', keyboardShortcut);
-    // Show the tutorial 
+    // Show the tutorial
     if (!localStorage.getItem('harmony-tutorial')) {
       setAction(HELP);
       localStorage.setItem('harmony-tutorial', 'true');

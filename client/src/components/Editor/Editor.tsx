@@ -1,6 +1,5 @@
 import { Fragment, useState } from 'react';
 import Draggable from 'react-draggable';
-import { isMobile, isDesktop } from 'react-device-detect';
 
 import MonacoEditor, { EditorDidMount } from 'react-monaco-editor';
 import * as monaco from 'monaco-editor';
@@ -18,8 +17,6 @@ import { AiOutlineSave as SaveIcon } from '@react-icons/all-files/ai/AiOutlineSa
 import { AiOutlineCopy as CopyIcon } from '@react-icons/all-files/ai/AiOutlineCopy';
 import { AiOutlineClose as CloseIcon } from '@react-icons/all-files/ai/AiOutlineClose';
 import { GrClear as ClearIcon } from '@react-icons/all-files/gr/GrClear';
-
-import '../styles/Editor.css';
 
 self.MonacoEnvironment = {
   getWorker(_, label) {

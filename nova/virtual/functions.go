@@ -116,3 +116,17 @@ func createBranch(repo *git.Repository, branchName string) error {
 	}
 	return nil
 }
+
+func checkoutToCommit(repo *git.Repository, commitHash string) error {
+	wt, _ := repo.Worktree()
+
+	err := wt.Checkout((&git.CheckoutOptions{
+		Hash: plumbing.NewHash(commitHash),
+	}))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

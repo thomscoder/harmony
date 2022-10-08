@@ -137,3 +137,11 @@ func GoToBranch() js.Func {
 		return strings.Join(branches, " ")
 	})
 }
+
+func GoToCommit() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		commitHash := args[0].String()
+		novaStore.GoToCommit(repository, commitHash)
+		return commitHash
+	})
+}

@@ -14,15 +14,13 @@ import { RiLayoutGridFill as MenuIcon } from '@react-icons/all-files/ri/RiLayout
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { actionState, virtualBranchState } from '../../atoms/atoms';
 
-import { AddFile, Contributors, CreateBranch, CreateCommit, FreeMode, GraphMode, UploadFile } from './utility/utilityComponents';
+import { AddFile, Contributors, CreateBranch, CreateCommit, FreeMode, UploadFile } from './utility/utilityComponents';
 import { CREATE_BRANCH, HELP } from '../../utils/texts';
 
 import { options } from './utility/menuOptions';
 import Help from './Help';
-import SwitchBranch from './SwitchBranch';
+import ShowGraph from './ShowGraph';
 import Clock from './Clock';
-
-import '../styles/Menu.css';
 
 const Transition = forwardRef(function Transition(
   props: TransitionProps & {
@@ -33,7 +31,7 @@ const Transition = forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const icons = [<AddFile />, <UploadFile />, <CreateBranch />, <CreateCommit />, <GraphMode />];
+const icons = [<AddFile />, <UploadFile />, <CreateBranch />, <CreateCommit />];
 
 const BootstrapTooltip = styled(({ className, ...props }: TooltipProps) => <Tooltip {...props} arrow classes={{ popper: className }} />)(({ theme }) => ({
   [`& .${tooltipClasses.arrow}`]: {
@@ -94,7 +92,6 @@ const HarmonyMenu = () => {
           </Button>
         </BootstrapTooltip>
         <Dialog open={open} TransitionComponent={Transition} keepMounted onClose={handleClose} aria-describedby="alert-dialog-slide-description">
-          {/* <DialogTitle>{'What do you want to do?'}</DialogTitle> */}
           {icons.map((icon, index) => {
             const option = options.get(index);
             const disabled = !!virtualBranch === false && option !== CREATE_BRANCH && option !== HELP;
@@ -113,7 +110,7 @@ const HarmonyMenu = () => {
           </MenuItem>
         </Dialog>
       </div>
-      <SwitchBranch />
+      <ShowGraph />
       <Help />
       <Clock />
     </div>

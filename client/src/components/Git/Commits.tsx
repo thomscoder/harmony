@@ -1,18 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { virtualCommitWrapper } from '../../utils/goFunctions';
-import { actionState, createVirtualBranchMessageState, gitFootPrintState, virtualBranchState } from '../../atoms/atoms';
+import { actionState, createVirtualBranchMessageState, gitFootPrintsState, virtualBranchState } from '../../atoms/atoms';
 
 import { AiOutlineClose as CloseIcon } from '@react-icons/all-files/ai/AiOutlineClose';
 
-import '../styles/Commit.css';
 import { gitFootPrintType } from '../../types/types';
 
 const Commit = () => {
   const virtualBranch = useRecoilValue(virtualBranchState);
   const setCreateVirtualBranchMessage = useSetRecoilState(createVirtualBranchMessageState);
   const setAction = useSetRecoilState(actionState);
-  const [gitFootPrint, setGitFootprint] = useRecoilState(gitFootPrintState)
+  const [gitFootPrints, setGitFootprints] = useRecoilState(gitFootPrintsState);
 
   const [commitMsg, setCommitMsg] = useState<string>();
   const [commitError, setCommitError] = useState<boolean>(false);
@@ -53,12 +52,17 @@ const Commit = () => {
       setCommitErrorMessage(`${commit} - Try again`);
       return setCommitError(true);
     }
-      setGitFootprint((prev: gitFootPrintType[]) => [...prev, {
+    setGitFootprints((prev: gitFootPrintType[]) => [
+      ...prev,
+      {
         branch: virtualBranch,
-        commits: commit,
-    }])
+        commit: commit,
+      },
+    ]);
+    console.log(commit);
     setCommitSuccessMessage('Committed successfully');
-    return setCommitSuccess(true);
+    setCommitSuccess(true);
+    return setAction('');
   };
 
   const commitsInputOnChangeHandler = (e: any) => {

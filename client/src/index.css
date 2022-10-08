@@ -14,6 +14,26 @@
   -webkit-text-size-adjust: 100%;
 }
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(64, 64, 64);
+}
+
 html,
 body {
   background: url('./img/desktop.jpg') !important;

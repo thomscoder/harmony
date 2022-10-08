@@ -5,7 +5,6 @@ import { actionState, createVirtualBranchMessageState, virtualBranchState, virtu
 
 import { AiOutlineClose as CloseIcon } from '@react-icons/all-files/ai/AiOutlineClose';
 
-import '../styles/Files.css';
 import { CREATE_FILE, UPLOAD_FILE } from '../../utils/texts';
 
 const Files = () => {
@@ -36,6 +35,7 @@ const Files = () => {
     const created = createVirtualFilesWrapper(virtualFileCreation);
     setVirtualFiles(created.split(' '));
     (fileCreationInputRef.current! as HTMLInputElement).value = '';
+    setAction('');
   };
 
   useEffect(() => {

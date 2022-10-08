@@ -46,13 +46,6 @@ li.active-branch {
   color: #ffac4b;
 }
 
-li.active-branch::after {
-  content: '- active';
-  margin-left: 0.3em;
-  color: #fff;
-  opacity: 0.3;
-}
-
 @media screen and (max-width: 768px) {
   .current-branch-name {
     left: 25%;

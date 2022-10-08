@@ -14,5 +14,6 @@ func main() {
 	js.Global().Set("getCurrentBranch", mapping.GetCurrentBranch())
 	js.Global().Set("getVirtualFiles", mapping.GetVirtualFiles())
 	js.Global().Set("goToBranch", mapping.GoToBranch())
+	js.Global().Set("goToCommit", mapping.GoToCommit())
 	<-ch
 }

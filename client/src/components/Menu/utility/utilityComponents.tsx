@@ -5,6 +5,7 @@ import { VscGitCommit as CommitIcon } from '@react-icons/all-files/vsc/VscGitCom
 import { AiFillGithub as GithubIcon } from '@react-icons/all-files/ai/AiFillGithub';
 import { BsUnlock as UnlockedIcon } from '@react-icons/all-files/bs/BsUnlock';
 import { BsLock as LockedIcon } from '@react-icons/all-files/bs/BsLock';
+
 import { useRecoilState } from 'recoil';
 import { freeModeDisabledState } from '../../../atoms/atoms';
 

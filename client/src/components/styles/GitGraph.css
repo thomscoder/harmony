@@ -1,0 +1,71 @@
+.graph-mode-container {
+  position: absolute;
+  top: calc(50% + 1.5em);
+  left: 50%;
+  transform: translate(-50%, calc(-50% - 3em));
+  width: 40%;
+  height: 80%;
+  background-color: #1e1e1e;
+  display: block;
+  position: relative;
+}
+
+.graph-actions {
+  height: 80%;
+  overflow: auto;
+}
+
+#graph-branches-list {
+  display: flex;
+  justify-content: space-evenly;
+  border-top: solid #fff;
+  background-color: #1e1e1e;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  z-index: 1000;
+  width: 100%;
+  overflow-x: auto;
+}
+
+.graph-mode-wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+#graph {
+  padding: 6em !important;
+}
+
+.graph-mode-container strong {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: 1px solid #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: #1e1e1e;
+  cursor: pointer;
+}
+
+g {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+  .graph-mode-container {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .graph-mode-container {
+    width: 100%;
+    height: calc(100% - 3em);
+  }
+
+  #graph {
+    padding: 3em !important;
+  }
+}

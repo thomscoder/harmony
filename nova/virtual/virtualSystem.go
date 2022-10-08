@@ -14,13 +14,16 @@ import (
 )
 
 type StoreInterface interface {
-	SetWatcher(billy.Filesystem) map[string]string
+	SetWatcher(store billy.Filesystem) map[string]string
 	CreateStore() (billy.Filesystem, *memory.Storage)
-	GetFiles(billy.Filesystem, string)
-	CreateFiles(billy.Filesystem, string)
-	OpenFile(store billy.Filesystem, fileName string)
+	GetFiles(store billy.Filesystem, dir string) []string
+	OpenFile(store billy.Filesystem, fileName string) billy.File
 	Save(store billy.Filesystem, filename string, content string)
-	GetFileContent(store billy.Filesystem, fileName string)
+	GetFileContent(store billy.Filesystem, fileName string) string
+	SetBranch(repo *git.Repository)
+	Screenshot(store billy.Filesystem, wt *git.Worktree, msg string) string
+	GotoBranch(repo *git.Repository, branchName string) error
+	GoToCommit(repo *git.Repository, commitHash string) error
 }
 type NovaStore struct {
 	Watcher       map[string]string
@@ -93,5 +96,14 @@ func (ns *NovaStore) GotoBranch(repo *git.Repository, branchName string) error {
 		return err
 	}
 	ns.SetBranch(repo)
+	return nil
+}
+
+func (ns *NovaStore) GoToCommit(repo *git.Repository, commitHash string) error {
+	err := checkoutToCommit(repo, commitHash)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }

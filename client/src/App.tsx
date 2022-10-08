@@ -28,6 +28,9 @@ function App() {
   const [prevOpenedFiles, setPrevOpenedFiles] = useState<Array<string>>([]);
 
   const clickOnFileHandler = (virtualFile: never) => {
+    // Get the file content from Go functions
+    // Open the file
+    // DEPRECATED: keep track of prev opened files (put that to color them differently or for future usages)
     setEditorContent(openVirtualFilesWrapper(virtualFile));
     setOpenFile(virtualFile);
     setPrevOpenedFiles((prev: Array<string>) => [...prev, virtualFile]);
@@ -42,6 +45,7 @@ function App() {
   };
 
   const keyboardShortcut = (e: KeyboardEvent) => {
+    // Keyboard shortcuts
     if (e.metaKey || e.ctrlKey) {
       if (e.shiftKey) {
         setAction(keyChecker(e.key)!);
@@ -51,7 +55,7 @@ function App() {
 
   useEffect(() => {
     window.addEventListener('keydown', keyboardShortcut);
-
+    // Show the tutorial 
     if (!localStorage.getItem('harmony-tutorial')) {
       setAction(HELP);
       localStorage.setItem('harmony-tutorial', 'true');
@@ -70,6 +74,7 @@ function App() {
       <div className="App">
         <div className="files-area" style={filesAreaStyle}>
           {virtualFiles.map((virtualFile, index) => {
+            // Double click on files to open (on mobile should disable the drag - from the menu)
             return (
               <Draggable key={index} bounds="parent" disabled={freeModeDisabled}>
                 <div

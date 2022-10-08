@@ -5,7 +5,6 @@ import { actionState, createVirtualBranchMessageState, virtualBranchState, virtu
 
 import { AiOutlineClose as CloseIcon } from '@react-icons/all-files/ai/AiOutlineClose';
 
-import '../styles/Files.css';
 import { CREATE_FILE, UPLOAD_FILE } from '../../utils/texts';
 
 const Files = () => {
@@ -15,7 +14,7 @@ const Files = () => {
   const [action, setAction] = useRecoilState(actionState);
 
   const [file, setFile] = useState<File>();
-  const [fileContent, setFileContent] = useState<any>();
+  const [fileContent, setFileContent] = useState<string | ArrayBuffer | null>();
   const [virtualFileCreation, setVirtualFileCreation] = useState<string>('');
   const [disableFileCreation, setDisableFileCreation] = useState<boolean>(false);
 
@@ -36,6 +35,7 @@ const Files = () => {
     const created = createVirtualFilesWrapper(virtualFileCreation);
     setVirtualFiles(created.split(' '));
     (fileCreationInputRef.current! as HTMLInputElement).value = '';
+    setAction('');
   };
 
   useEffect(() => {
@@ -63,7 +63,7 @@ const Files = () => {
 
   useEffect(() => {
     if (file && fileContent) {
-      const created = createVirtualFilesWrapper(file.name, fileContent);
+      const created = createVirtualFilesWrapper(file.name, fileContent as string|undefined);
       if (created) {
         setVirtualFiles(created.split(' '));
         const fileSelector = document.getElementById('file-selector') as HTMLInputElement;

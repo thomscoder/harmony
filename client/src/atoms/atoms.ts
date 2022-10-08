@@ -29,3 +29,13 @@ export const freeModeDisabledState = atom({
   key: 'freeModeDisabledState',
   default: false,
 });
+
+export const gitFootPrintsState = atom({
+  key: 'gitFootPrintsState',
+  default: [
+    {
+      branch: 'master',
+      commit: {},
+    },
+  ] as any,
+});

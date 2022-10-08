@@ -1,19 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { virtualCommitWrapper } from '../../utils/goFunctions';
-import { actionState, createVirtualBranchMessageState, virtualBranchState } from '../../atoms/atoms';
+import { actionState, createVirtualBranchMessageState, gitFootPrintsState, virtualBranchState } from '../../atoms/atoms';
 
 import { AiOutlineClose as CloseIcon } from '@react-icons/all-files/ai/AiOutlineClose';
 
-import '../styles/Commit.css';
+import { gitFootPrintType } from '../../types/types';
 
 const Commit = () => {
   const virtualBranch = useRecoilValue(virtualBranchState);
   const setCreateVirtualBranchMessage = useSetRecoilState(createVirtualBranchMessageState);
   const setAction = useSetRecoilState(actionState);
+  const [gitFootPrints, setGitFootprints] = useRecoilState(gitFootPrintsState);
 
   const [commitMsg, setCommitMsg] = useState<string>();
-  const [commits, setCommits] = useState();
   const [commitError, setCommitError] = useState<boolean>(false);
   const [commitSuccess, setCommitSuccess] = useState<boolean>(false);
   const [commitSuccessMessage, setCommitSuccessMessage] = useState<string>('');
@@ -47,13 +47,24 @@ const Commit = () => {
     (inputCommitRef.current! as HTMLInputElement).value = '';
     // creates a new commit
     const commit = virtualCommitWrapper(commitMsg as string);
+
     if (typeof commit === 'string') {
       setCommitErrorMessage(`${commit} - Try again`);
       return setCommitError(true);
     }
-    setCommits(commit);
+    setGitFootprints((prev: gitFootPrintType[]) => [
+      ...prev,
+      {
+        branch: virtualBranch,
+        commit: commit,
+      },
+    ]);
+    console.log(commit);
     setCommitSuccessMessage('Committed successfully');
-    return setCommitSuccess(true);
+    // DEPRECATED: setAction(''); makes the input disappear 
+    // hence the commitSuccess won't have any visual effects anymore
+    setCommitSuccess(true);
+    return setAction('');
   };
 
   const commitsInputOnChangeHandler = (e: any) => {

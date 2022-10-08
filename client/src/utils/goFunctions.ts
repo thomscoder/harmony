@@ -42,3 +42,6 @@ export const virtualCommitWrapper = (commitMsg: string) => {
     return 'No file modifications found';
   }
 };
+
+// @ts-ignore
+export const goToCommitWrapper = (hash: string) => goToCommit(hash);

@@ -75,7 +75,7 @@ const Help = () => {
               <br />
               <strong>Shortcuts</strong>
               <br />- <strong>Ctrl + Shift + B</strong> : Create a branch (or switching to one)
-              <br />- <strong>Ctrl + Shift + C</strong> : Create a new commit
+              <br />- <strong>Ctrl + Shift + K</strong> : Create a new commit
               <br />- <strong>Ctrl + Shift + F</strong> : Create a new file
               <br />- <strong>Ctrl + Shift + U </strong>: Upload a new file
               <br />- <strong>Ctrl + Shift + H</strong> : Open this guide

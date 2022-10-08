@@ -14,7 +14,7 @@ const Files = () => {
   const [action, setAction] = useRecoilState(actionState);
 
   const [file, setFile] = useState<File>();
-  const [fileContent, setFileContent] = useState<any>();
+  const [fileContent, setFileContent] = useState<string | ArrayBuffer | null>();
   const [virtualFileCreation, setVirtualFileCreation] = useState<string>('');
   const [disableFileCreation, setDisableFileCreation] = useState<boolean>(false);
 
@@ -63,7 +63,7 @@ const Files = () => {
 
   useEffect(() => {
     if (file && fileContent) {
-      const created = createVirtualFilesWrapper(file.name, fileContent);
+      const created = createVirtualFilesWrapper(file.name, fileContent as string|undefined);
       if (created) {
         setVirtualFiles(created.split(' '));
         const fileSelector = document.getElementById('file-selector') as HTMLInputElement;

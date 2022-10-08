@@ -61,6 +61,8 @@ const Commit = () => {
     ]);
     console.log(commit);
     setCommitSuccessMessage('Committed successfully');
+    // DEPRECATED: setAction(''); makes the input disappear 
+    // hence the commitSuccess won't have any visual effects anymore
     setCommitSuccess(true);
     return setAction('');
   };

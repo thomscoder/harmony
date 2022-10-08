@@ -49,6 +49,10 @@
   cursor: pointer;
 }
 
+g {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 1200px) {
   .graph-mode-container {
     width: 55%;

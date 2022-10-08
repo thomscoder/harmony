@@ -17,6 +17,7 @@ import { AiOutlineSave as SaveIcon } from '@react-icons/all-files/ai/AiOutlineSa
 import { AiOutlineCopy as CopyIcon } from '@react-icons/all-files/ai/AiOutlineCopy';
 import { AiOutlineClose as CloseIcon } from '@react-icons/all-files/ai/AiOutlineClose';
 import { GrClear as ClearIcon } from '@react-icons/all-files/gr/GrClear';
+import { EditorProps } from '../../types/types';
 
 self.MonacoEnvironment = {
   getWorker(_, label) {
@@ -55,7 +56,7 @@ const MONACO_OPTIONS: monaco.editor.IEditorConstructionOptions = {
   },
 };
 
-export function Editor({ text, save, close, filename }: { text: string; save: any; close: any; filename: string }) {
+export function Editor({ text, save, close, filename }: EditorProps) {
   const [writtenText, setWrittenText] = useState<string>('');
   const [saved, setSaved] = useState<boolean>(false);
   const [fileExt, setFileExt] = useState<string>('');

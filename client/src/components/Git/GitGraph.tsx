@@ -28,7 +28,6 @@ const GitGraph = () => {
           lineWidth: 3,
           label: {
             borderRadius: 0,
-            bgColor: 'white',
             strokeColor: 'black',
             color: 'black',
             font: 'normal 10pt Arial',

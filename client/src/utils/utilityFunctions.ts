@@ -4,7 +4,7 @@ export const keyChecker = (key: string) => {
   switch (key) {
     case 'b':
       return CREATE_BRANCH;
-    case 'c':
+    case 'k':
       return CREATE_COMMIT;
     case 'f':
       return CREATE_FILE;

@@ -145,3 +145,18 @@ func GoToCommit() js.Func {
 		return commitHash
 	})
 }
+
+func ExploreDirectory() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		filename := args[0].String()
+		filenames := novaStore.ExploreDirectory(store, texts.CurrentDirectory, filename)
+		return strings.Join(filenames, " ")
+	})
+}
+
+func IsDirectory() js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) interface{} {
+		filename := args[0].String()
+		return novaStore.IsDirectory(store, texts.CurrentDirectory, filename)
+	})
+}

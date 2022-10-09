@@ -83,8 +83,40 @@ input[type='file'] {
   overflow-y: auto;
 }
 
+.files-area.dir-open {
+    position: relative;
+    background-color: #1e1e1e;
+    width: 70%;
+    height: 70vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.files-area.dir-open .dir-menu {
+  border: solid #f4f4ff;
+  background-color: #1e1e1e;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+    z-index: 1;
+}
+
+.files-area.dir-open .dir-menu svg {
+  position: absolute;
+  left: 2em;
+  height: 100%;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .file-selectors p + div form {
     text-align: center;
   }
+  .files-area.dir-open {
+    background-color: #1e1e1e;
+    width: 100%;
+}
 }

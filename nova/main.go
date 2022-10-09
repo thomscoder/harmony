@@ -15,5 +15,7 @@ func main() {
 	js.Global().Set("getVirtualFiles", mapping.GetVirtualFiles())
 	js.Global().Set("goToBranch", mapping.GoToBranch())
 	js.Global().Set("goToCommit", mapping.GoToCommit())
+	js.Global().Set("exploreDirectory", mapping.ExploreDirectory())
+	js.Global().Set("isDirectory", mapping.IsDirectory())
 	<-ch
 }

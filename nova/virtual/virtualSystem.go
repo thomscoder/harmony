@@ -44,6 +44,14 @@ func (ns *NovaStore) GetFiles(store billy.Filesystem, dir string) []string {
 	return listFiles(store, dir)
 }
 
+func (ns *NovaStore) ExploreDirectory(store billy.Filesystem, dir string, filename string) []string {
+	return getDirectoryFiles(store, dir, filename)
+}
+
+func (ns *NovaStore) IsDirectory(store billy.Filesystem, dir string, filename string) bool {
+	return isDirectory(store, dir, filename)
+}
+
 func (ns *NovaStore) OpenFile(store billy.Filesystem, fileName string) billy.File {
 	fileGotCreated, file := openFile(store, fileName)
 	if fileGotCreated != nil {

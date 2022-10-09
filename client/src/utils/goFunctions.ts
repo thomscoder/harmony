@@ -45,3 +45,12 @@ export const virtualCommitWrapper = (commitMsg: string) => {
 
 // @ts-ignore
 export const goToCommitWrapper = (hash: string) => goToCommit(hash);
+
+export const exploreDirectoryWrapper = (filename: string) => {
+  // @ts-ignore
+  const filepath = `./${filename}/` + exploreDirectory(filename);
+  return filepath.split(' ');
+};
+
+// @ts-ignore
+export const isDirectoryWrapper = (filename: string) => isDirectory(filename);

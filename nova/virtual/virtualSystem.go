@@ -24,6 +24,8 @@ type StoreInterface interface {
 	Screenshot(store billy.Filesystem, wt *git.Worktree, msg string) string
 	GotoBranch(repo *git.Repository, branchName string) error
 	GoToCommit(repo *git.Repository, commitHash string) error
+	IsDirectory(store billy.Filesystem, dir string, filename string) bool
+	ExploreDirectory(store billy.Filesystem, dir string, filename string) []string
 }
 type NovaStore struct {
 	Watcher       map[string]string
@@ -42,6 +44,14 @@ func (ns *NovaStore) CreateStore() (billy.Filesystem, *memory.Storage) {
 
 func (ns *NovaStore) GetFiles(store billy.Filesystem, dir string) []string {
 	return listFiles(store, dir)
+}
+
+func (ns *NovaStore) ExploreDirectory(store billy.Filesystem, dir string, filename string) []string {
+	return getDirectoryFiles(store, dir, filename)
+}
+
+func (ns *NovaStore) IsDirectory(store billy.Filesystem, dir string, filename string) bool {
+	return isDirectory(store, dir, filename)
 }
 
 func (ns *NovaStore) OpenFile(store billy.Filesystem, fileName string) billy.File {

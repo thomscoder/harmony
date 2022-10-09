@@ -46,6 +46,42 @@ func listFiles(store billy.Filesystem, dir string) []string {
 	return fileInfos
 }
 
+func isDirectory(store billy.Filesystem, dir string, filename string) bool {
+	files, err := store.ReadDir(dir)
+
+	if err != nil {
+		log.Println(err)
+		return false
+	}
+
+	for _, file := range files {
+		if file.Name() == filename {
+			if file.IsDir() {
+				return true
+			}
+		}
+	}
+
+	return false
+}
+
+func getDirectoryFiles(store billy.Filesystem, dir string, filename string) []string {
+	files, err := store.ReadDir(dir)
+
+	if err != nil {
+		log.Println(err)
+		return nil
+	}
+	for _, file := range files {
+		if file.Name() == filename {
+			if file.IsDir() {
+				return listFiles(store, file.Name())
+			}
+		}
+	}
+	return nil
+}
+
 func openFile(store billy.Filesystem, fileName string) (billy.Filesystem, billy.File) {
 	newFile, err := store.OpenFile(fileName, os.O_RDWR|os.O_CREATE, 0644)
 	if err != nil {

@@ -4,7 +4,7 @@ Quickly upload, create, open, read, modify and download files, on the fly.
 
 Harmony also keep tracks of your changes or "workspaces" through git branches and git commits, all in-memory in your browser.
 
-<img src="https://i.ibb.co/brDw78C/Schermata-2022-10-08-alle-14-56-53.png" width=80% />
+<img src="https://i.ibb.co/pRbfJwT/Schermata-2022-10-09-alle-14-51-59-min.png" width=80% />
 
 > Just me experimenting with WebAssembly.
 <br/>

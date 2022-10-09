@@ -20,6 +20,15 @@
   transition: all 0.3s ease;
 }
 
+.virtual-file-wrapper svg path {
+  stroke: #000;
+  stroke-width: 5;
+}
+
+.virtual-file-wrapper.dir svg path {
+  fill: #ffca8e;
+}
+
 .virtual-file-wrapper:hover {
   background-color: rgba(68, 214, 255, 0.3);
   border: 0.01em solid white;
@@ -83,8 +92,46 @@ input[type='file'] {
   overflow-y: auto;
 }
 
+.files-area.dir-open {
+  position: relative;
+  background-color: rgba(30, 30, 30, 0.9);
+  width: 70%;
+  height: 70vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.files-area.dir-open .dir-menu {
+  border: solid #f4f4ff;
+  background-color: #1e1e1e;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  z-index: 1;
+}
+
+.files-area.dir-open .dir-menu svg {
+  position: absolute;
+  left: 2em;
+  height: 100%;
+  cursor: pointer;
+}
+
+.file {
+  text-align: center;
+  background-color: #1e1e1e;
+  padding: 0.2em 0.5em;
+}
+
 @media screen and (max-width: 768px) {
   .file-selectors p + div form {
     text-align: center;
+  }
+  .files-area.dir-open {
+    background-color: #1e1e1e;
+    width: 100%;
   }
 }

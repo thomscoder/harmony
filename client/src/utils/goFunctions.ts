@@ -48,7 +48,7 @@ export const goToCommitWrapper = (hash: string) => goToCommit(hash);
 
 export const exploreDirectoryWrapper = (filename: string) => {
   // @ts-ignore
-  const filepath = `./${filename}/`+ exploreDirectory(filename);
+  const filepath = `./${filename}/` + exploreDirectory(filename);
   return filepath.split(' ');
 };
 

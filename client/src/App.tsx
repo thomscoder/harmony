@@ -30,13 +30,13 @@ function App() {
   const [prevOpenedFiles, setPrevOpenedFiles] = useState<Array<string>>([]);
   const [openDir, setOpenDir] = useState<string>('');
   const [oldVirtualFiles, setOldVirtualFiles] = useState<Array<never>>([]);
-  
+
   const goBackInDirectories = () => {
     if (oldVirtualFiles.length > 0) {
       setVirtualFiles([...oldVirtualFiles]);
-      return setOldVirtualFiles([])
+      return setOldVirtualFiles([]);
     }
-  }
+  };
 
   const clickOnFileHandler = (virtualFile: never, isDirectory: boolean = false) => {
     if (!isDirectory) {
@@ -73,10 +73,13 @@ function App() {
 
   useEffect(() => {
     window.addEventListener('keydown', keyboardShortcut);
+    if (localStorage.getItem('harmony-tutorial')) {
+      localStorage.removeItem('harmony-tutorial');
+    }
     // Show the tutorial
-    if (!localStorage.getItem('harmony-tutorial')) {
+    if (!localStorage.getItem('new-harmony-tutorial')) {
       setAction(HELP);
-      localStorage.setItem('harmony-tutorial', 'true');
+      localStorage.setItem('new-harmony-tutorial', 'true');
     }
 
     return () => {
@@ -91,10 +94,12 @@ function App() {
       <Files />
       <div className="App">
         <div className={`files-area ${oldVirtualFiles.length > 0 ? 'dir-open' : ''}`} style={filesAreaStyle}>
-          {oldVirtualFiles.length > 0 && <div className="dir-menu">
-            {openDir}
-            <BackArrowIcon onClick={goBackInDirectories}/>
-            </div>}
+          {oldVirtualFiles.length > 0 && (
+            <div className="dir-menu">
+              {openDir}
+              <BackArrowIcon onClick={goBackInDirectories} />
+            </div>
+          )}
           {virtualFiles.map((virtualFile, index) => {
             // Check if directory
             const isDirectory = isDirectoryWrapper(virtualFile);
@@ -109,10 +114,10 @@ function App() {
                   onDoubleClick={() => {
                     clickOnFileHandler(virtualFile, isDirectory);
                   }}
-                  className={`virtual-file-wrapper ${prevOpened}`}
+                  className={`virtual-file-wrapper ${prevOpened} ${isDirectory ? 'dir' : ''}`}
                 >
-                  {isDirectory ?  <FolderIcon size={60} /> : <DocumentIcon size={60} />}
-                  <div key={index} className="file">
+                  {isDirectory ? <FolderIcon size={60} /> : <DocumentIcon size={60} />}
+                  <div key={index} className={`file`}>
                     {virtualFileName}
                   </div>
                 </div>

@@ -24,6 +24,8 @@ type StoreInterface interface {
 	Screenshot(store billy.Filesystem, wt *git.Worktree, msg string) string
 	GotoBranch(repo *git.Repository, branchName string) error
 	GoToCommit(repo *git.Repository, commitHash string) error
+	IsDirectory(store billy.Filesystem, dir string, filename string) bool
+	ExploreDirectory(store billy.Filesystem, dir string, filename string) []string
 }
 type NovaStore struct {
 	Watcher       map[string]string

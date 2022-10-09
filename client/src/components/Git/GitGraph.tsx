@@ -48,9 +48,11 @@ const GitGraph = () => {
     });
 
     gitFootPrints.forEach((footPrint: gitFootPrintType, index: number) => {
+      const branchName: string = footPrint.branch;
+
       gitgraph.branch(footPrint.branch).commit({
         hash: footPrint.commit?.hash ?? '',
-        subject: footPrint.commit?.message ?? index === 0 ? '' : `Checkout to ${footPrint.branch}`,
+        subject: index === 0 ? branchName : footPrint.commit?.message ?? `Checkout to ${footPrint.branch}`,
         onClick: () => clickOnCommitHandler(footPrint.commit.hash),
         onMessageClick: () => clickOnCommitHandler(footPrint.commit.hash),
         style: {

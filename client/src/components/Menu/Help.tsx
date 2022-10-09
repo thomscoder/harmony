@@ -85,6 +85,16 @@ const Help = () => {
               <br />
               Harmony keeps track of the branches and commits you create allowing you to go back to a specific commit.
               <video width="100%" src="https://user-images.githubusercontent.com/78874117/194714002-f6ec20c5-c7cc-4144-85e1-0bdb65097b7d.mov" controls autoPlay></video>
+              <br />
+              Click on the commits with the Hash (not the Checkout commits) to visit that particular commit.
+              <br />
+              <br />
+              <br />
+              <strong>Harmony also has a basic support for Folders</strong> (does not support nested folders yet)
+              <video width="100%" src="https://user-images.githubusercontent.com/78874117/194757713-771d1df7-3272-497b-9973-2e253da13e20.mp4" controls autoPlay></video>
+              <br />
+              Create one by simply creating a new file with this format: <strong>"DIRECTORY_NAME/FILE_NAME"</strong>.
+              <br />
               {(action === HELP || open) && (
                 <Button
                   sx={{
